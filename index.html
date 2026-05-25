@@ -410,6 +410,34 @@
     .floating-badge { position:absolute; right:18px; bottom:22px; background:white; color:var(--azul-noche); border-radius:18px; padding:14px 16px; box-shadow:0 14px 34px rgba(8,42,104,.18); font-weight:900; display:flex; align-items:center; gap:10px; }
     .floating-badge i { width:34px; height:34px; border-radius:12px; background:var(--gradiente); display:grid; place-items:center; color:white; font-style:normal; }
 
+    /* Hero animations */
+    @keyframes hero-in {
+      from { opacity:0; transform:translateY(18px); }
+      to   { opacity:1; transform:translateY(0);    }
+    }
+    @keyframes badge-pop {
+      from { opacity:0; transform:translateY(12px) scale(.92); }
+      to   { opacity:1; transform:translateY(0)    scale(1);   }
+    }
+    .hero-copy  { animation: hero-in .75s .05s cubic-bezier(.22,1,.36,1) both; }
+    .hero-card  { animation: hero-in .8s  .25s cubic-bezier(.22,1,.36,1) both; }
+    .browser-top { animation: hero-in .45s .55s ease both; }
+    .dash-hero   { animation: hero-in .45s .72s ease both; }
+    .mini-card:nth-child(1) { animation: hero-in .4s .90s ease both; }
+    .mini-card:nth-child(2) { animation: hero-in .4s 1.05s ease both; }
+    .mini-card:nth-child(3) { animation: hero-in .4s 1.20s ease both; }
+    .mini-card:nth-child(4) { animation: hero-in .4s 1.35s ease both; }
+    .floating-badge { animation: badge-pop .55s 1.55s cubic-bezier(.34,1.56,.64,1) both; }
+
+    /* Grad text */
+    .grad { font-style:normal; background:var(--gradiente); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
+
+    /* Mini-card improvements */
+    .mini-card { transition:transform .22s, border-color .22s; }
+    .mini-card:hover { transform:translateY(-4px); border-color:rgba(0,194,255,.40); }
+    .mini-card b { display:flex; align-items:center; gap:7px; font-size:22px; margin-bottom:4px; }
+    .mini-card .mc-icon { font-size:18px; }
+
     /* Service cards */
     .services-grid { display:grid; grid-template-columns:repeat(3, 1fr); gap:24px; }
     .service-card {
@@ -703,7 +731,7 @@
       <div class="container hero-grid">
         <div class="hero-copy reveal">
           <span class="pill">LTM Soluciones Digitales</span>
-          <h1>Diseñamos tu web y tu sistema digital a medida.</h1>
+          <h1>Diseñamos tu web y tu <em class="grad">sistema digital</em> a medida.</h1>
           <p>Ayudo a negocios, emprendedores y empresas a tener una presencia digital profesional con <strong>páginas web modernas, landing pages, tiendas online, sistemas personalizados y automatización tecnológica</strong>.</p>
           <div class="cta-row">
             <a href="#contacto" class="btn btn-primary">Quiero mi página web →</a>
@@ -727,10 +755,10 @@
                 <div class="circle-metric">100%</div>
               </div>
               <div class="mini-grid">
-                <div class="mini-card"><b>Web</b><span>Diseño profesional responsive</span></div>
-                <div class="mini-card"><b>SEO</b><span>Base optimizada para Google</span></div>
-                <div class="mini-card"><b>CRM</b><span>Formularios y captación de clientes</span></div>
-                <div class="mini-card"><b>Data</b><span>Reportes, control y automatización</span></div>
+                <div class="mini-card"><b><span class="mc-icon">🌐</span>Web</b><span>Diseño profesional responsive</span></div>
+                <div class="mini-card"><b><span class="mc-icon">📈</span>SEO</b><span>Base optimizada para Google</span></div>
+                <div class="mini-card"><b><span class="mc-icon">🤝</span>CRM</b><span>Formularios y captación de clientes</span></div>
+                <div class="mini-card"><b><span class="mc-icon">📊</span>Data</b><span>Reportes, control y automatización</span></div>
               </div>
               <div class="floating-badge"><i>✓</i> Solución lista para vender</div>
             </div>
