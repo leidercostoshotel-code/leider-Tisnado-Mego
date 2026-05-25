@@ -114,6 +114,29 @@
 
     html { scroll-behavior:smooth; }
 
+
+    body.custom-profile-cursor,
+    body.custom-profile-cursor a,
+    body.custom-profile-cursor button,
+    body.custom-profile-cursor input,
+    body.custom-profile-cursor textarea,
+    body.custom-profile-cursor select,
+    body.custom-profile-cursor [role="button"] {
+      cursor: url('foto-leider.jpg') 16 16, auto;
+    }
+
+    @media (pointer: coarse), (hover: none) {
+      body.custom-profile-cursor,
+      body.custom-profile-cursor a,
+      body.custom-profile-cursor button,
+      body.custom-profile-cursor input,
+      body.custom-profile-cursor textarea,
+      body.custom-profile-cursor select,
+      body.custom-profile-cursor [role="button"] {
+        cursor: auto;
+      }
+    }
+
     /* ===== WhatsApp Flotante ===== */
     .wa-float {
       position:fixed; bottom:28px; right:28px; z-index:9999;
@@ -1369,5 +1392,13 @@
       .finally(() => { btn.disabled = false; btn.textContent = 'Enviar solicitud →'; });
     });
   </script>
+
+  <script>
+    (() => {
+      const isDesktopPointer = window.matchMedia('(pointer: fine) and (hover: hover)').matches;
+      if (isDesktopPointer) document.body.classList.add('custom-profile-cursor');
+    })();
+  </script>
+
 </body>
 </html>
