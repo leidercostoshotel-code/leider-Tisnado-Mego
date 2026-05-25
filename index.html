@@ -118,26 +118,32 @@
     html { scroll-behavior:smooth; }
 
 
-    body.custom-profile-cursor,
-    body.custom-profile-cursor a,
-    body.custom-profile-cursor button,
-    body.custom-profile-cursor input,
-    body.custom-profile-cursor textarea,
-    body.custom-profile-cursor select,
-    body.custom-profile-cursor [role="button"] {
-      cursor: url('foto-leider.jpg') 16 16, auto;
+    @media (pointer: fine) and (hover: hover) {
+      body, body * { cursor: none !important; }
     }
 
-    @media (pointer: coarse), (hover: none) {
-      body.custom-profile-cursor,
-      body.custom-profile-cursor a,
-      body.custom-profile-cursor button,
-      body.custom-profile-cursor input,
-      body.custom-profile-cursor textarea,
-      body.custom-profile-cursor select,
-      body.custom-profile-cursor [role="button"] {
-        cursor: auto;
-      }
+    #ltm-cursor {
+      position: fixed;
+      top: 0; left: 0;
+      width: 44px; height: 44px;
+      border-radius: 50%;
+      background: url('foto-leider.jpg') center / cover no-repeat;
+      border: 2px solid rgba(0, 194, 255, 0.8);
+      box-shadow: 0 0 16px rgba(0, 194, 255, 0.45), 0 4px 20px rgba(0,0,0,0.35);
+      pointer-events: none;
+      z-index: 999999;
+      margin-left: -22px;
+      margin-top: -22px;
+      opacity: 0;
+      transition: opacity 0.35s ease, width 0.2s ease, height 0.2s ease,
+                  margin 0.2s ease, box-shadow 0.2s ease;
+      will-change: left, top;
+    }
+    #ltm-cursor.ltm-visible { opacity: 1; }
+    #ltm-cursor.ltm-click {
+      width: 34px; height: 34px;
+      margin-left: -17px; margin-top: -17px;
+      box-shadow: 0 0 26px rgba(0, 194, 255, 0.8), 0 4px 20px rgba(0,0,0,0.35);
     }
 
     /* ===== WhatsApp Flotante ===== */
@@ -1657,8 +1663,27 @@
 
   <script>
     (() => {
-      const isDesktopPointer = window.matchMedia('(pointer: fine) and (hover: hover)').matches;
-      if (isDesktopPointer) document.body.classList.add('custom-profile-cursor');
+      if (!window.matchMedia('(pointer: fine) and (hover: hover)').matches) return;
+      const cur = document.createElement('div');
+      cur.id = 'ltm-cursor';
+      document.body.appendChild(cur);
+      let cx = window.innerWidth / 2, cy = window.innerHeight / 2;
+      let mx = cx, my = cy, seen = false;
+      document.addEventListener('mousemove', e => {
+        mx = e.clientX; my = e.clientY;
+        if (!seen) { seen = true; cur.classList.add('ltm-visible'); }
+      });
+      document.addEventListener('mousedown', () => cur.classList.add('ltm-click'));
+      document.addEventListener('mouseup',   () => cur.classList.remove('ltm-click'));
+      document.addEventListener('mouseleave',() => cur.classList.remove('ltm-visible'));
+      document.addEventListener('mouseenter',() => { if (seen) cur.classList.add('ltm-visible'); });
+      (function tick() {
+        cx += (mx - cx) * 0.13;
+        cy += (my - cy) * 0.13;
+        cur.style.left = cx + 'px';
+        cur.style.top  = cy + 'px';
+        requestAnimationFrame(tick);
+      })();
     })();
   </script>
 
