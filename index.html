@@ -390,19 +390,51 @@
     /* Service cards */
     .services-grid { display:grid; grid-template-columns:repeat(3, 1fr); gap:24px; }
     .service-card {
-      position:relative; background:white; border-radius:var(--radio); padding:30px;
-      border:1px solid rgba(8,42,104,.08); box-shadow:0 16px 45px rgba(8,42,104,.08);
-      overflow:hidden; min-height:330px; transition:.25s ease;
+      position:relative; background:white; border-radius:28px; padding:0;
+      border:1px solid rgba(8,42,104,.07); box-shadow:0 10px 40px rgba(8,42,104,.09);
+      overflow:hidden; transition:.32s cubic-bezier(.4,0,.2,1);
+      display:flex; flex-direction:column;
     }
-    .service-card:hover { transform:translateY(-8px); box-shadow:var(--sombra); }
-    .service-card::after { content:attr(data-num); position:absolute; right:22px; bottom:8px; font-size:74px; font-weight:900; color:rgba(13,110,253,.07); letter-spacing:-.06em; }
-    .service-media { position:relative; height:150px; border-radius:18px; overflow:hidden; margin-bottom:18px; }
-    .service-media img { width:100%; height:100%; object-fit:cover; display:block; filter:saturate(1.08) contrast(1.02); }
-    .service-media::after { content:''; position:absolute; inset:0; background:linear-gradient(180deg, rgba(6,26,68,0) 35%, rgba(6,26,68,.42) 100%); }
-    .icon { width:58px; height:58px; border-radius:18px; background:linear-gradient(135deg, rgba(13,110,253,.14), rgba(0,194,255,.20)); display:grid; place-items:center; font-size:28px; margin-bottom:22px; }
-    .service-card p { margin:14px 0 20px; }
-    .service-card ul { list-style:none; display:grid; gap:9px; color:#475569; font-weight:650; font-size:14px; }
+    .service-card:hover { transform:translateY(-12px); box-shadow:0 32px 72px rgba(8,42,104,.17); border-color:rgba(0,194,255,.25); }
+    .service-card::before {
+      content:''; position:absolute; top:0; left:0; right:0; height:3px;
+      background:var(--gradiente); transform:scaleX(0); transform-origin:left;
+      transition:transform .35s ease; z-index:4;
+    }
+    .service-card:hover::before { transform:scaleX(1); }
+    .service-card::after { content:attr(data-num); position:absolute; right:18px; bottom:14px; font-size:68px; font-weight:900; color:rgba(13,110,253,.055); letter-spacing:-.06em; pointer-events:none; }
+    .service-media { position:relative; height:196px; overflow:hidden; flex-shrink:0; }
+    .service-media img {
+      width:100%; height:100%; object-fit:cover; display:block;
+      filter:saturate(1.12) contrast(1.04);
+      transition:transform .55s cubic-bezier(.4,0,.2,1);
+    }
+    .service-card:hover .service-media img { transform:scale(1.08); }
+    .service-media::after {
+      content:''; position:absolute; inset:0;
+      background:linear-gradient(180deg, rgba(6,26,68,0) 38%, rgba(6,26,68,.52) 100%);
+    }
+    .icon {
+      width:58px; height:58px; border-radius:18px;
+      background:white; border:2px solid rgba(8,42,104,.07);
+      box-shadow:0 8px 24px rgba(8,42,104,.16);
+      display:grid; place-items:center; font-size:28px;
+      position:relative; z-index:3;
+      margin:-29px 0 0 22px; flex-shrink:0;
+    }
+    .sc-body { padding:16px 24px 26px; flex:1; display:flex; flex-direction:column; }
+    .sc-body h3 { margin-bottom:9px; }
+    .service-card p { margin:0 0 16px; flex:1; }
+    .service-card ul { list-style:none; display:grid; gap:9px; color:#475569; font-weight:650; font-size:14px; margin-bottom:20px; }
     .service-card li::before { content:'✓'; color:var(--azul); font-weight:900; margin-right:9px; }
+    .sc-cta {
+      display:inline-flex; align-items:center; gap:8px;
+      color:var(--azul); font-weight:800; font-size:14px;
+      padding:10px 16px; border-radius:999px;
+      background:rgba(13,110,253,.07); border:1px solid rgba(13,110,253,.12);
+      transition:.2s; align-self:flex-start;
+    }
+    .sc-cta:hover { background:var(--gradiente); color:white; gap:12px; border-color:transparent; }
 
     /* About / pillars */
     .about { background:white; }
@@ -707,111 +739,138 @@
 
         <div class="services-grid">
           <article class="service-card reveal" data-num=".01">
-            <div class="service-media"><img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=1200&q=80" alt="💻 servicio profesional"></div>
-              <div class="icon">💻</div>
-            <h3>Diseño de páginas web</h3>
-            <p>Sitios modernos, rápidos y adaptados a celular, tablet y escritorio.</p>
-            <ul>
-              <li>Diseño corporativo premium</li>
-              <li>Secciones profesionales</li>
-              <li>Botones de WhatsApp y contacto</li>
-            </ul>
+            <div class="service-media"><img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=800&q=80" alt="Diseño de páginas web" loading="lazy"></div>
+            <div class="icon">💻</div>
+            <div class="sc-body">
+              <h3>Diseño de páginas web</h3>
+              <p>Sitios modernos, rápidos y adaptados a celular, tablet y escritorio.</p>
+              <ul>
+                <li>Diseño corporativo premium</li>
+                <li>Secciones profesionales</li>
+                <li>Botones de WhatsApp y contacto</li>
+              </ul>
+              <a href="#contacto" class="sc-cta">Cotizar este servicio →</a>
+            </div>
           </article>
 
           <article class="service-card reveal" data-num=".02">
-            <div class="service-media"><img src="https://images.unsplash.com/photo-1472851294608-062f824d29cc?auto=format&fit=crop&w=1200&q=80" alt="🛒 servicio profesional"></div>
-              <div class="icon">🛒</div>
-            <h3>Tiendas online</h3>
-            <p>Catálogos digitales para mostrar productos, recibir pedidos y mejorar tus ventas.</p>
-            <ul>
-              <li>Productos y categorías</li>
-              <li>Carrito o pedido por WhatsApp</li>
-              <li>Diseño enfocado en conversión</li>
-            </ul>
+            <div class="service-media"><img src="https://images.unsplash.com/photo-1472851294608-062f824d29cc?auto=format&fit=crop&w=800&q=80" alt="Tiendas online" loading="lazy"></div>
+            <div class="icon">🛒</div>
+            <div class="sc-body">
+              <h3>Tiendas online</h3>
+              <p>Catálogos digitales para mostrar productos, recibir pedidos y mejorar tus ventas.</p>
+              <ul>
+                <li>Productos y categorías</li>
+                <li>Carrito o pedido por WhatsApp</li>
+                <li>Diseño enfocado en conversión</li>
+              </ul>
+              <a href="#contacto" class="sc-cta">Cotizar este servicio →</a>
+            </div>
           </article>
 
           <article class="service-card reveal" data-num=".03">
-            <div class="service-media"><img src="https://images.unsplash.com/photo-1581092921461-39b9d08a9b2b?auto=format&fit=crop&w=1200&q=80" alt="⚙️ servicio profesional"></div>
-              <div class="icon">⚙️</div>
-            <h3>Sistemas a medida</h3>
-            <p>Herramientas personalizadas para controlar información, procesos, reportes y operaciones.</p>
-            <ul>
-              <li>Paneles administrativos</li>
-              <li>Registro y control de datos</li>
-              <li>Automatizaciones internas</li>
-            </ul>
+            <div class="service-media"><img src="https://images.unsplash.com/photo-1581092921461-39b9d08a9b2b?auto=format&fit=crop&w=800&q=80" alt="Sistemas a medida" loading="lazy"></div>
+            <div class="icon">⚙️</div>
+            <div class="sc-body">
+              <h3>Sistemas a medida</h3>
+              <p>Herramientas personalizadas para controlar información, procesos, reportes y operaciones.</p>
+              <ul>
+                <li>Paneles administrativos</li>
+                <li>Registro y control de datos</li>
+                <li>Automatizaciones internas</li>
+              </ul>
+              <a href="#contacto" class="sc-cta">Cotizar este servicio →</a>
+            </div>
           </article>
 
           <article class="service-card reveal" data-num=".04">
-            <div class="service-media"><img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=1200&q=80" alt="Landing pages de venta"></div>
+            <div class="service-media"><img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=800&q=80" alt="Landing pages de venta" loading="lazy"></div>
             <div class="icon">🚀</div>
-            <h3>Landing pages de venta</h3>
-            <p>Páginas de alto impacto para campañas, promociones, anuncios o servicios específicos.</p>
-            <ul>
-              <li>Copy comercial</li>
-              <li>CTA estratégico</li>
-              <li>Diseño rápido y directo</li>
-            </ul>
+            <div class="sc-body">
+              <h3>Landing pages de venta</h3>
+              <p>Páginas de alto impacto para campañas, promociones, anuncios o servicios específicos.</p>
+              <ul>
+                <li>Copy comercial estratégico</li>
+                <li>CTA optimizado para convertir</li>
+                <li>Diseño rápido y directo</li>
+              </ul>
+              <a href="#contacto" class="sc-cta">Cotizar este servicio →</a>
+            </div>
           </article>
 
           <article class="service-card reveal" data-num=".05">
-            <div class="service-media"><img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1200&q=80" alt="Dashboards web y reportes"></div>
+            <div class="service-media"><img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=800&q=80" alt="Dashboards web y reportes" loading="lazy"></div>
             <div class="icon">📊</div>
-            <h3>Dashboards web y reportes</h3>
-            <p>Paneles interactivos integrados en tu sistema o web para visualizar tus datos en tiempo real.</p>
-            <ul>
-              <li>KPIs personalizados</li>
-              <li>Gráficos y tablas dinámicas</li>
-              <li>Control de ingresos y procesos</li>
-            </ul>
+            <div class="sc-body">
+              <h3>Dashboards web y reportes</h3>
+              <p>Paneles interactivos en tu web para visualizar tus datos en tiempo real.</p>
+              <ul>
+                <li>KPIs personalizados</li>
+                <li>Gráficos y tablas dinámicas</li>
+                <li>Control de ingresos y procesos</li>
+              </ul>
+              <a href="#contacto" class="sc-cta">Cotizar este servicio →</a>
+            </div>
           </article>
 
           <article class="service-card reveal" data-num=".06">
-            <div class="service-media"><img src="https://images.unsplash.com/photo-1563013544-824ae1b704d3?auto=format&fit=crop&w=1200&q=80" alt="Mantenimiento y soporte"></div>
+            <div class="service-media"><img src="https://images.unsplash.com/photo-1563013544-824ae1b704d3?auto=format&fit=crop&w=800&q=80" alt="Mantenimiento y soporte" loading="lazy"></div>
             <div class="icon">🛡️</div>
-            <h3>Mantenimiento y soporte</h3>
-            <p>Actualizaciones, mejoras, respaldo, optimización y acompañamiento continuo.</p>
-            <ul>
-              <li>Mejoras visuales</li>
-              <li>Corrección de errores</li>
-              <li>Acompañamiento personalizado</li>
-            </ul>
+            <div class="sc-body">
+              <h3>Mantenimiento y soporte</h3>
+              <p>Actualizaciones, mejoras, respaldo, optimización y acompañamiento continuo.</p>
+              <ul>
+                <li>Mejoras visuales y funcionales</li>
+                <li>Corrección de errores rápida</li>
+                <li>Acompañamiento personalizado</li>
+              </ul>
+              <a href="#contacto" class="sc-cta">Cotizar este servicio →</a>
+            </div>
           </article>
 
           <article class="service-card reveal" data-num=".07">
-            <div class="service-media"><img src="https://images.unsplash.com/photo-1554224155-6726b3ff858f?auto=format&fit=crop&w=1200&q=80" alt="Power BI a medida"></div>
+            <div class="service-media"><img src="https://images.unsplash.com/photo-1554224155-6726b3ff858f?auto=format&fit=crop&w=800&q=80" alt="Power BI a medida" loading="lazy"></div>
             <div class="icon">📈</div>
-            <h3>Power BI a medida</h3>
-            <p>Dashboards profesionales en Power BI con tus datos reales para tomar decisiones rápidas e inteligentes.</p>
-            <ul>
-              <li>Dashboards interactivos y filtros</li>
-              <li>Conexión a Excel, SQL, web y más</li>
-              <li>Reportes automáticos y actualizados</li>
-            </ul>
+            <div class="sc-body">
+              <h3>Power BI a medida</h3>
+              <p>Dashboards profesionales en Power BI con tus datos reales para decisiones inteligentes.</p>
+              <ul>
+                <li>Dashboards interactivos y filtros</li>
+                <li>Conexión a Excel, SQL, web y más</li>
+                <li>Reportes automáticos y actualizados</li>
+              </ul>
+              <a href="#contacto" class="sc-cta">Cotizar este servicio →</a>
+            </div>
           </article>
 
           <article class="service-card reveal" data-num=".08">
-            <div class="service-media"><img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=1200&q=80" alt="Excel a medida"></div>
+            <div class="service-media"><img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=800&q=80" alt="Excel a medida" loading="lazy"></div>
             <div class="icon">📗</div>
-            <h3>Excel a medida</h3>
-            <p>Planillas profesionales con fórmulas avanzadas, macros y automatizaciones para simplificar tu trabajo.</p>
-            <ul>
-              <li>Plantillas personalizadas</li>
-              <li>Macros VBA y automatizaciones</li>
-              <li>Cálculos, reportes y cuadros de mando</li>
-            </ul>
+            <div class="sc-body">
+              <h3>Excel a medida</h3>
+              <p>Planillas profesionales con fórmulas avanzadas, macros y automatizaciones.</p>
+              <ul>
+                <li>Plantillas personalizadas</li>
+                <li>Macros VBA y automatizaciones</li>
+                <li>Cálculos, reportes y cuadros de mando</li>
+              </ul>
+              <a href="#contacto" class="sc-cta">Cotizar este servicio →</a>
+            </div>
           </article>
 
           <article class="service-card reveal" data-num=".09">
-            <div class="service-media"><img src="https://images.unsplash.com/photo-1484417894907-623942c8ee29?auto=format&fit=crop&w=1200&q=80" alt="Google Sheets y automatización"></div>
+            <div class="service-media"><img src="https://images.unsplash.com/photo-1484417894907-623942c8ee29?auto=format&fit=crop&w=800&q=80" alt="Google Sheets y automatización" loading="lazy"></div>
             <div class="icon">☁️</div>
-            <h3>Google Sheets y automatización</h3>
-            <p>Soluciones en la nube con Google Sheets, Apps Script y formularios para gestionar tu negocio desde cualquier lugar.</p>
-            <ul>
-              <li>Hojas de cálculo colaborativas</li>
-              <li>Automatización con Apps Script</li>
-              <li>Integración con Google Forms y Drive</li>
-            </ul>
+            <div class="sc-body">
+              <h3>Google Sheets y automatización</h3>
+              <p>Soluciones en la nube con Google Sheets y Apps Script para gestionar tu negocio desde cualquier lugar.</p>
+              <ul>
+                <li>Hojas de cálculo colaborativas</li>
+                <li>Automatización con Apps Script</li>
+                <li>Integración con Google Forms y Drive</li>
+              </ul>
+              <a href="#contacto" class="sc-cta">Cotizar este servicio →</a>
+            </div>
           </article>
         </div>
       </div>
