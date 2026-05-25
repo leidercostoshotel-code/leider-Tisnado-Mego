@@ -6,6 +6,7 @@
   <title>LTM Soluciones Digitales | Páginas Web, Sistemas a Medida y Tecnología</title>
   <meta name="description" content="LTM Soluciones Digitales de Leider Tisnado Mego: diseño de páginas web, sistemas personalizados, tiendas online, automatización y soluciones tecnológicas para negocios." />
   <meta name="theme-color" content="#061a44" />
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' stop-color='%23061a44'/%3E%3Cstop offset='50%25' stop-color='%230b3b91'/%3E%3Cstop offset='100%25' stop-color='%2300c2ff'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='100' height='100' rx='20' fill='url(%23g)'/%3E%3Ctext x='50' y='45' font-family='Arial Black,Arial,sans-serif' font-size='30' font-weight='900' fill='%2300c2ff' text-anchor='middle' letter-spacing='-1'%3ELTM%3C/text%3E%3Ctext x='50' y='68' font-family='Arial,sans-serif' font-size='13' font-weight='700' fill='rgba(255,255,255,0.75)' text-anchor='middle' letter-spacing='4'%3EWEB%3C/text%3E%3C/svg%3E">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
@@ -33,6 +34,11 @@
       background:var(--fondo);
       overflow-x:hidden;
       line-height:1.6;
+    }
+    .bg-watermark {
+      position:fixed; inset:0; pointer-events:none; z-index:-1;
+      background:url('logo.png') center center / 420px no-repeat;
+      opacity:.07;
     }
     a { color:inherit; text-decoration:none; }
     img { max-width:100%; display:block; }
@@ -273,6 +279,7 @@
   </style>
 </head>
 <body>
+  <div class="bg-watermark" aria-hidden="true"></div>
   <div class="topbar">
     <div class="container">
       <span><b>Desarrollo web personalizado</b> · páginas, sistemas y soluciones digitales para negocios</span>
