@@ -1,0 +1,107 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" width="400" height="400">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#061a44"/>
+      <stop offset="55%" stop-color="#0b3b91"/>
+      <stop offset="100%" stop-color="#0077cc"/>
+    </linearGradient>
+    <linearGradient id="skin" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#c9845a"/>
+      <stop offset="100%" stop-color="#b5723f"/>
+    </linearGradient>
+    <linearGradient id="shirt" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0d3a80"/>
+      <stop offset="100%" stop-color="#061a44"/>
+    </linearGradient>
+    <clipPath id="clip"><circle cx="200" cy="200" r="197"/></clipPath>
+    <filter id="soft"><feGaussianBlur stdDeviation="0.5"/></filter>
+  </defs>
+
+  <!-- Fondo -->
+  <circle cx="200" cy="200" r="200" fill="url(#bg)"/>
+
+  <!-- Decorativos de fondo -->
+  <circle cx="320" cy="65"  r="110" fill="none" stroke="rgba(0,194,255,.10)" stroke-width="1.5"/>
+  <circle cx="320" cy="65"  r="70"  fill="none" stroke="rgba(0,194,255,.08)" stroke-width="1"/>
+  <circle cx="55"  cy="340" r="80"  fill="rgba(255,255,255,.04)"/>
+  <text x="28" y="72" font-family="monospace" font-size="14" fill="rgba(0,194,255,.18)" transform="rotate(-20,28,72)">&lt;/&gt;</text>
+  <text x="318" y="355" font-family="monospace" font-size="12" fill="rgba(0,194,255,.15)" transform="rotate(15,318,355)">{  }</text>
+
+  <g clip-path="url(#clip)">
+
+    <!-- Traje / cuerpo -->
+    <path d="M -10,420 L -10,268
+             Q -10,230 42,215
+             L 100,200 C 135,210 162,228 200,233
+             C 238,228 265,210 300,200
+             L 358,215 Q 410,230 410,268 L 410,420 Z"
+          fill="url(#shirt)"/>
+
+    <!-- Cuello de camisa / collar blanco -->
+    <path d="M 162,226 L 200,260 L 238,226 L 225,220 L 200,248 L 175,220 Z"
+          fill="rgba(255,255,255,.13)"/>
+
+    <!-- Detalle de corbata azul cian -->
+    <path d="M 196,238 L 200,268 L 204,238 L 201,226 Z" fill="rgba(0,194,255,.45)"/>
+    <path d="M 196,268 L 193,280 L 200,276 L 207,280 L 204,268 Z" fill="rgba(0,194,255,.45)"/>
+
+    <!-- Cuello piel -->
+    <rect x="178" y="182" width="44" height="52" rx="12" fill="url(#skin)"/>
+
+    <!-- Cabeza -->
+    <ellipse cx="200" cy="152" rx="72" ry="80" fill="url(#skin)"/>
+
+    <!-- Cabello oscuro -->
+    <path d="M 128,136
+             Q 130,68 200,65
+             Q 270,68 272,136
+             Q 258,104 200,102
+             Q 142,104 128,136 Z"
+          fill="#150900"/>
+    <!-- Patillas -->
+    <path d="M 128,136 Q 122,156 126,172 Q 130,154 135,145 Z" fill="#150900"/>
+    <path d="M 272,136 Q 278,156 274,172 Q 270,154 265,145 Z" fill="#150900"/>
+
+    <!-- Orejas -->
+    <ellipse cx="128" cy="158" rx="11" ry="15" fill="#b5723f"/>
+    <ellipse cx="272" cy="158" rx="11" ry="15" fill="#b5723f"/>
+    <ellipse cx="128" cy="158" rx="6"  ry="9"  fill="#a3622f"/>
+    <ellipse cx="272" cy="158" rx="6"  ry="9"  fill="#a3622f"/>
+
+    <!-- Ojos - blancos -->
+    <ellipse cx="172" cy="152" rx="11" ry="12" fill="white"/>
+    <ellipse cx="228" cy="152" rx="11" ry="12" fill="white"/>
+    <!-- Iris -->
+    <circle cx="174" cy="153" r="7.5" fill="#2b1a00"/>
+    <circle cx="230" cy="153" r="7.5" fill="#2b1a00"/>
+    <!-- Pupila -->
+    <circle cx="175" cy="154" r="4" fill="#0d0800"/>
+    <circle cx="231" cy="154" r="4" fill="#0d0800"/>
+    <!-- Brillo -->
+    <circle cx="177" cy="151" r="2.2" fill="white" opacity=".9"/>
+    <circle cx="233" cy="151" r="2.2" fill="white" opacity=".9"/>
+
+    <!-- Cejas -->
+    <path d="M 158,137 Q 172,131 186,136" stroke="#150900" stroke-width="3.5" fill="none" stroke-linecap="round"/>
+    <path d="M 214,136 Q 228,131 242,137" stroke="#150900" stroke-width="3.5" fill="none" stroke-linecap="round"/>
+
+    <!-- Nariz -->
+    <path d="M 200,160 Q 193,173 195,179 Q 200,183 205,179 Q 207,173 200,160"
+          fill="rgba(0,0,0,.07)"/>
+    <circle cx="194" cy="178" r="3.5" fill="rgba(0,0,0,.06)"/>
+    <circle cx="206" cy="178" r="3.5" fill="rgba(0,0,0,.06)"/>
+
+    <!-- Boca - sonrisa -->
+    <path d="M 180,190 Q 200,204 220,190" stroke="#9a5535" stroke-width="2.8" fill="none" stroke-linecap="round"/>
+    <!-- Dientes -->
+    <path d="M 181,191 Q 200,202 219,191 Q 200,200 181,191" fill="rgba(255,255,255,.75)"/>
+
+    <!-- Degradado inferior para fusionar con el traje -->
+    <rect x="0" y="390" width="400" height="30" fill="url(#bg)" opacity=".8"/>
+
+  </g>
+
+  <!-- Anillo exterior -->
+  <circle cx="200" cy="200" r="194" fill="none" stroke="rgba(0,194,255,.4)"  stroke-width="4"/>
+  <circle cx="200" cy="200" r="199" fill="none" stroke="rgba(0,194,255,.15)" stroke-width="2"/>
+</svg>
