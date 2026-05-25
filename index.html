@@ -213,12 +213,7 @@
       background:rgba(255,255,255,.65); flex-shrink:0;
     }
     .svc-visual { display:flex; justify-content:center; align-items:center; }
-    .svc-emoji {
-      font-size:clamp(110px, 14vw, 190px); line-height:1;
-      filter:drop-shadow(0 24px 60px rgba(0,0,0,.35));
-      animation:svc-float 5s ease-in-out infinite;
-      display:block; user-select:none;
-    }
+    .svc-photo { width:min(460px,100%); aspect-ratio:4/3; border-radius:28px; object-fit:cover; border:1px solid rgba(255,255,255,.25); box-shadow:0 26px 60px rgba(0,0,0,.35); animation:svc-float 5s ease-in-out infinite; }
     @keyframes svc-float {
       0%,100% { transform:translateY(0) rotate(-2deg); }
       50%      { transform:translateY(-18px) rotate(2deg); }
@@ -401,6 +396,9 @@
     }
     .service-card:hover { transform:translateY(-8px); box-shadow:var(--sombra); }
     .service-card::after { content:attr(data-num); position:absolute; right:22px; bottom:8px; font-size:74px; font-weight:900; color:rgba(13,110,253,.07); letter-spacing:-.06em; }
+    .service-media { position:relative; height:150px; border-radius:18px; overflow:hidden; margin-bottom:18px; }
+    .service-media img { width:100%; height:100%; object-fit:cover; display:block; filter:saturate(1.08) contrast(1.02); }
+    .service-media::after { content:''; position:absolute; inset:0; background:linear-gradient(180deg, rgba(6,26,68,0) 35%, rgba(6,26,68,.42) 100%); }
     .icon { width:58px; height:58px; border-radius:18px; background:linear-gradient(135deg, rgba(13,110,253,.14), rgba(0,194,255,.20)); display:grid; place-items:center; font-size:28px; margin-bottom:22px; }
     .service-card p { margin:14px 0 20px; }
     .service-card ul { list-style:none; display:grid; gap:9px; color:#475569; font-weight:650; font-size:14px; }
@@ -704,12 +702,13 @@
         <div class="section-title center reveal">
           <div class="eyebrow">Servicios digitales</div>
           <h2>Todo lo que tu negocio necesita para verse profesional y vender mejor.</h2>
-          <p>Servicios pensados para empresas que quieren destacar, automatizar procesos y transmitir confianza desde el primer clic.</p>
+          <p>Servicios pensados para empresas que quieren destacar, automatizar procesos y transmitir confianza desde el primer clic. Diseño premium con estética real y enfoque en conversión.</p>
         </div>
 
         <div class="services-grid">
           <article class="service-card reveal" data-num=".01">
-            <div class="icon">💻</div>
+            <div class="service-media"><img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=1200&q=80" alt="💻 servicio profesional"></div>
+              <div class="icon">💻</div>
             <h3>Diseño de páginas web</h3>
             <p>Sitios modernos, rápidos y adaptados a celular, tablet y escritorio.</p>
             <ul>
@@ -720,7 +719,8 @@
           </article>
 
           <article class="service-card reveal" data-num=".02">
-            <div class="icon">🛒</div>
+            <div class="service-media"><img src="https://images.unsplash.com/photo-1472851294608-062f824d29cc?auto=format&fit=crop&w=1200&q=80" alt="🛒 servicio profesional"></div>
+              <div class="icon">🛒</div>
             <h3>Tiendas online</h3>
             <p>Catálogos digitales para mostrar productos, recibir pedidos y mejorar tus ventas.</p>
             <ul>
@@ -731,7 +731,8 @@
           </article>
 
           <article class="service-card reveal" data-num=".03">
-            <div class="icon">⚙️</div>
+            <div class="service-media"><img src="https://images.unsplash.com/photo-1581092921461-39b9d08a9b2b?auto=format&fit=crop&w=1200&q=80" alt="⚙️ servicio profesional"></div>
+              <div class="icon">⚙️</div>
             <h3>Sistemas a medida</h3>
             <p>Herramientas personalizadas para controlar información, procesos, reportes y operaciones.</p>
             <ul>
@@ -1144,9 +1145,9 @@
     // ===== Service Showcase Carousel =====
     (function() {
       const DATA = [
-        { icon:'💻', name:'Diseño de páginas web',           tag:'Web Profesional',       desc:'Sitios modernos, rápidos y adaptados a todos los dispositivos. Transmiten confianza desde el primer clic.', feats:['Diseño corporativo premium','Secciones y galerías profesionales','Integración WhatsApp y contacto'], bg:'linear-gradient(135deg,#061a44 0%,#0b3b91 55%,#006aaa 100%)', cta:'Quiero mi web' },
-        { icon:'🛒', name:'Tiendas online',                  tag:'E-commerce',             desc:'Catálogos digitales para mostrar productos, recibir pedidos y aumentar tus ventas por internet.', feats:['Productos, categorías y precios','Pedidos por WhatsApp o carrito','Diseño enfocado en conversión'], bg:'linear-gradient(135deg,#2d1b69 0%,#6d28d9 55%,#8b5cf6 100%)', cta:'Quiero mi tienda' },
-        { icon:'⚙️', name:'Sistemas a medida',               tag:'Software Personalizado', desc:'Herramientas digitales a tu medida para gestionar tu negocio, controlar procesos y ahorrar horas de trabajo.', feats:['Paneles administrativos','Registro y control de datos','Automatizaciones internas'], bg:'linear-gradient(135deg,#0f2027 0%,#203a43 50%,#2c5364 100%)', cta:'Necesito un sistema' },
+        { icon:'💻', image:'https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?auto=format&fit=crop&w=1200&q=80', name:'Diseño de páginas web',           tag:'Web Profesional',       desc:'Sitios modernos, rápidos y adaptados a todos los dispositivos. Transmiten confianza desde el primer clic.', feats:['Diseño corporativo premium','Secciones y galerías profesionales','Integración WhatsApp y contacto'], bg:'linear-gradient(135deg,#061a44 0%,#0b3b91 55%,#006aaa 100%)', cta:'Quiero mi web' },
+        { icon:'🛒', image:'https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?auto=format&fit=crop&w=1200&q=80', name:'Tiendas online',                  tag:'E-commerce',             desc:'Catálogos digitales para mostrar productos, recibir pedidos y aumentar tus ventas por internet.', feats:['Productos, categorías y precios','Pedidos por WhatsApp o carrito','Diseño enfocado en conversión'], bg:'linear-gradient(135deg,#2d1b69 0%,#6d28d9 55%,#8b5cf6 100%)', cta:'Quiero mi tienda' },
+        { icon:'⚙️', image:'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=1200&q=80', name:'Sistemas a medida',               tag:'Software Personalizado', desc:'Herramientas digitales a tu medida para gestionar tu negocio, controlar procesos y ahorrar horas de trabajo.', feats:['Paneles administrativos','Registro y control de datos','Automatizaciones internas'], bg:'linear-gradient(135deg,#0f2027 0%,#203a43 50%,#2c5364 100%)', cta:'Necesito un sistema' },
         { icon:'🚀', name:'Landing pages de venta',          tag:'Alta Conversión',        desc:'Páginas de alto impacto para campañas y servicios que convierten visitantes en clientes reales.', feats:['Copy comercial estratégico','Diseño rápido y directo','CTA y formularios optimizados'], bg:'linear-gradient(135deg,#7f1d1d 0%,#c2410c 50%,#ea580c 100%)', cta:'Quiero mi landing' },
         { icon:'📊', name:'Dashboards web y reportes',       tag:'Datos en Tiempo Real',   desc:'Paneles interactivos con tus indicadores clave para tomar decisiones rápidas e informadas.', feats:['KPIs personalizados','Gráficos y tablas dinámicas','Control de ingresos y procesos'], bg:'linear-gradient(135deg,#052e16 0%,#14532d 50%,#16a34a 100%)', cta:'Quiero mi dashboard' },
         { icon:'📈', name:'Power BI a medida',               tag:'Business Intelligence',  desc:'Dashboards profesionales en Power BI conectados a tus datos reales para análisis avanzado de negocio.', feats:['Dashboards interactivos y filtros','Conexión a Excel, SQL, web y más','Reportes automáticos y actualizados'], bg:'linear-gradient(135deg,#451a03 0%,#92400e 50%,#d97706 100%)', cta:'Quiero Power BI' },
@@ -1179,7 +1180,7 @@
               <a href="#contacto" class="btn btn-primary" style="display:inline-flex;background:rgba(255,255,255,.18);backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,.3);color:white;box-shadow:none;" onmouseover="this.style.background='rgba(255,255,255,.28)'" onmouseout="this.style.background='rgba(255,255,255,.18)'">${s.cta} →</a>
             </div>
             <div class="svc-visual">
-              <span class="svc-emoji">${s.icon}</span>
+              <img class="svc-photo" src="${s.image || "https://images.unsplash.com/photo-1551434678-e076c223a692?auto=format&fit=crop&w=1200&q=80"}" alt="${s.name}" loading="lazy" decoding="async">
             </div>
           </div>`;
         track.appendChild(sl);
