@@ -487,16 +487,40 @@
     .stat span { color:#bfeaff; }
 
     /* Portfolio */
-    .portfolio-grid { display:grid; grid-template-columns:repeat(3, 1fr); gap:22px; }
-    .portfolio-card { border-radius:28px; overflow:hidden; background:white; border:1px solid rgba(8,42,104,.08); box-shadow:0 15px 36px rgba(8,42,104,.08); }
-    .portfolio-shot { min-height:210px; background:linear-gradient(135deg, #0b2e6f, #0d6efd, #00c2ff); padding:18px; }
-    .fake-window { height:175px; border-radius:18px; background:rgba(255,255,255,.88); overflow:hidden; padding:16px; }
-    .fake-nav { height:20px; border-radius:999px; background:#dbeafe; margin-bottom:16px; }
-    .fake-hero { height:50px; border-radius:14px; background:linear-gradient(90deg, #061a44, #0d6efd); margin-bottom:12px; }
-    .fake-row { display:grid; grid-template-columns:1fr 1fr; gap:10px; }
-    .fake-row div { height:56px; border-radius:14px; background:#eef6ff; }
-    .portfolio-body { padding:22px; }
-    .tag { display:inline-flex; padding:7px 11px; border-radius:999px; background:#eaf7ff; color:#006fb0; font-size:12px; font-weight:850; margin-bottom:12px; }
+    .portfolio-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:26px; }
+    .portfolio-card { border-radius:28px; overflow:hidden; background:white; border:1px solid rgba(8,42,104,.08); box-shadow:0 15px 36px rgba(8,42,104,.08); transition:.32s cubic-bezier(.4,0,.2,1); display:flex; flex-direction:column; }
+    .portfolio-card:hover { transform:translateY(-8px); box-shadow:0 30px 64px rgba(8,42,104,.15); }
+    .portfolio-shot { min-height:220px; padding:20px; position:relative; }
+    .portfolio-shot.ps-web  { background:linear-gradient(135deg,#0b2e6f,#0d6efd 60%,#00c2ff); }
+    .portfolio-shot.ps-sys  { background:linear-gradient(135deg,#0f2027,#1c3a5e 50%,#0b3b91); }
+    .portfolio-shot.ps-shop { background:linear-gradient(135deg,#3b0066,#7c3aed 55%,#c026d3); }
+    .portfolio-shot.ps-bi   { background:linear-gradient(135deg,#060d1a,#0b3060 55%,#0077cc); }
+    .fake-window { height:180px; border-radius:16px; background:rgba(255,255,255,.93); overflow:hidden; padding:14px; box-shadow:0 8px 24px rgba(0,0,0,.18); }
+    .fake-nav { height:16px; border-radius:999px; background:#dbeafe; margin-bottom:10px; width:80%; }
+    .fake-hero { height:44px; border-radius:11px; background:linear-gradient(90deg,#061a44,#0d6efd); margin-bottom:9px; }
+    .fake-row { display:grid; grid-template-columns:1fr 1fr; gap:8px; }
+    .fake-row div { height:50px; border-radius:11px; background:#eef6ff; }
+    .fake-table-hd { height:18px; border-radius:6px; background:#dbeafe44; margin-bottom:7px; }
+    .fake-table { display:grid; gap:6px; }
+    .fake-table-row { height:20px; border-radius:6px; background:#f1f5f9; display:flex; align-items:center; padding:0 7px; gap:6px; }
+    .ft-dot { width:7px; height:7px; border-radius:50%; flex-shrink:0; }
+    .ft-bar { flex:1; height:5px; border-radius:999px; background:#e2e8f0; }
+    .fake-products { display:grid; grid-template-columns:repeat(3,1fr); gap:6px; margin-top:6px; }
+    .fake-product { border-radius:8px; background:#f5f0ff; overflow:hidden; }
+    .fake-product-img { height:36px; background:linear-gradient(135deg,rgba(124,58,237,.35),rgba(192,38,211,.35)); }
+    .fake-product-body { padding:4px 6px; }
+    .fake-product-line { height:4px; border-radius:999px; background:#d8b4fe; margin:3px 0; }
+    .fake-product-price { height:4px; border-radius:999px; background:#7c3aed; width:50%; margin-top:4px; }
+    .fake-metrics { display:grid; grid-template-columns:repeat(3,1fr); gap:6px; margin-bottom:8px; }
+    .fake-metric { background:#eef6ff; border-radius:8px; padding:6px; }
+    .fake-metric-num { height:12px; border-radius:4px; background:linear-gradient(90deg,#0d6efd,#00c2ff); margin-bottom:4px; width:60%; }
+    .fake-metric-lbl { height:4px; border-radius:999px; background:#bfdbfe; width:80%; }
+    .fake-chart { height:68px; border-radius:10px; background:#f0f9ff; padding:8px 10px; display:flex; align-items:flex-end; gap:5px; }
+    .fake-bar { flex:1; border-radius:4px 4px 0 0; background:linear-gradient(0deg,#0d6efd,#00c2ff); }
+    .portfolio-body { padding:22px 24px 26px; flex:1; display:flex; flex-direction:column; }
+    .portfolio-body h3 { margin:8px 0 8px; }
+    .portfolio-body p { color:#475569; font-size:15px; line-height:1.6; flex:1; margin:0 0 18px; }
+    .tag { display:inline-flex; padding:6px 12px; border-radius:999px; background:#eaf7ff; color:#006fb0; font-size:12px; font-weight:850; margin-bottom:4px; }
 
     /* Pricing */
     .pricing { background:linear-gradient(180deg, #ffffff, #edf8ff); }
@@ -951,21 +975,94 @@
         <div class="section-title center reveal">
           <div class="eyebrow">Soluciones que puedo crear</div>
           <h2>Proyectos digitales para diferentes tipos de negocio.</h2>
-          <p>Estos son ejemplos de trabajos que puedes ofrecer desde tu página web para mostrar capacidad y variedad.</p>
+          <p>Desde páginas web corporativas hasta sistemas internos y dashboards de datos — cada proyecto se construye a medida para que tu negocio se vea profesional y venda más.</p>
         </div>
         <div class="portfolio-grid">
+
           <article class="portfolio-card reveal">
-            <div class="portfolio-shot"><div class="fake-window"><div class="fake-nav"></div><div class="fake-hero"></div><div class="fake-row"><div></div><div></div></div></div></div>
-            <div class="portfolio-body"><span class="tag">Web Corporativa</span><h3>Empresa de servicios</h3><p>Presentación profesional, beneficios, servicios, contacto y llamadas a la acción.</p></div>
+            <div class="portfolio-shot ps-web">
+              <div class="fake-window">
+                <div class="fake-nav"></div>
+                <div class="fake-hero"></div>
+                <div class="fake-row"><div></div><div></div></div>
+              </div>
+            </div>
+            <div class="portfolio-body">
+              <span class="tag">Web Corporativa</span>
+              <h3>Empresa de servicios</h3>
+              <p>Página profesional con secciones de beneficios, servicios, contacto y llamadas a la acción que convierten visitantes en clientes.</p>
+              <a href="#contacto" class="sc-cta">Quiero algo similar →</a>
+            </div>
           </article>
+
           <article class="portfolio-card reveal">
-            <div class="portfolio-shot"><div class="fake-window"><div class="fake-nav"></div><div class="fake-hero"></div><div class="fake-row"><div></div><div></div></div></div></div>
-            <div class="portfolio-body"><span class="tag">Sistema Interno</span><h3>Control de operaciones</h3><p>Registro de datos, consultas, indicadores y paneles para gestión diaria.</p></div>
+            <div class="portfolio-shot ps-sys">
+              <div class="fake-window">
+                <div class="fake-nav"></div>
+                <div class="fake-table-hd"></div>
+                <div class="fake-table">
+                  <div class="fake-table-row"><div class="ft-dot" style="background:#22c55e"></div><div class="ft-bar"></div></div>
+                  <div class="fake-table-row"><div class="ft-dot" style="background:#f59e0b"></div><div class="ft-bar" style="width:65%"></div></div>
+                  <div class="fake-table-row"><div class="ft-dot" style="background:#3b82f6"></div><div class="ft-bar" style="width:80%"></div></div>
+                  <div class="fake-table-row"><div class="ft-dot" style="background:#22c55e"></div><div class="ft-bar" style="width:55%"></div></div>
+                </div>
+              </div>
+            </div>
+            <div class="portfolio-body">
+              <span class="tag" style="background:#dcfce7;color:#166534">Sistema Interno</span>
+              <h3>Control de operaciones</h3>
+              <p>Panel administrativo para registrar datos, consultar indicadores y gestionar los procesos de tu negocio desde cualquier dispositivo.</p>
+              <a href="#contacto" class="sc-cta">Quiero algo similar →</a>
+            </div>
           </article>
+
           <article class="portfolio-card reveal">
-            <div class="portfolio-shot"><div class="fake-window"><div class="fake-nav"></div><div class="fake-hero"></div><div class="fake-row"><div></div><div></div></div></div></div>
-            <div class="portfolio-body"><span class="tag">Tienda Online</span><h3>Catálogo digital</h3><p>Productos, descripción, precio, botón de pedido y diseño adaptable a celular.</p></div>
+            <div class="portfolio-shot ps-shop">
+              <div class="fake-window">
+                <div class="fake-nav" style="background:#e9d5ff"></div>
+                <div class="fake-hero" style="background:linear-gradient(90deg,#4a0072,#7c3aed)"></div>
+                <div class="fake-products">
+                  <div class="fake-product"><div class="fake-product-img"></div><div class="fake-product-body"><div class="fake-product-line"></div><div class="fake-product-price"></div></div></div>
+                  <div class="fake-product"><div class="fake-product-img"></div><div class="fake-product-body"><div class="fake-product-line"></div><div class="fake-product-price"></div></div></div>
+                  <div class="fake-product"><div class="fake-product-img"></div><div class="fake-product-body"><div class="fake-product-line"></div><div class="fake-product-price"></div></div></div>
+                </div>
+              </div>
+            </div>
+            <div class="portfolio-body">
+              <span class="tag" style="background:#f3e8ff;color:#6b21a8">Tienda Online</span>
+              <h3>Catálogo digital</h3>
+              <p>Productos con foto, precio y descripción. Botón de pedido directo por WhatsApp y diseño 100% adaptado a celular.</p>
+              <a href="#contacto" class="sc-cta">Quiero algo similar →</a>
+            </div>
           </article>
+
+          <article class="portfolio-card reveal">
+            <div class="portfolio-shot ps-bi">
+              <div class="fake-window">
+                <div class="fake-metrics">
+                  <div class="fake-metric"><div class="fake-metric-num"></div><div class="fake-metric-lbl"></div></div>
+                  <div class="fake-metric"><div class="fake-metric-num" style="width:45%"></div><div class="fake-metric-lbl"></div></div>
+                  <div class="fake-metric"><div class="fake-metric-num" style="width:70%"></div><div class="fake-metric-lbl"></div></div>
+                </div>
+                <div class="fake-chart">
+                  <div class="fake-bar" style="height:42%"></div>
+                  <div class="fake-bar" style="height:66%"></div>
+                  <div class="fake-bar" style="height:54%"></div>
+                  <div class="fake-bar" style="height:82%"></div>
+                  <div class="fake-bar" style="height:46%"></div>
+                  <div class="fake-bar" style="height:92%"></div>
+                  <div class="fake-bar" style="height:70%"></div>
+                </div>
+              </div>
+            </div>
+            <div class="portfolio-body">
+              <span class="tag" style="background:#e0f2fe;color:#0369a1">Power BI / Dashboard</span>
+              <h3>Análisis de datos</h3>
+              <p>Reportes visuales y dashboards interactivos en Power BI o Google Sheets para tomar decisiones rápidas con tus propios datos.</p>
+              <a href="#contacto" class="sc-cta">Quiero algo similar →</a>
+            </div>
+          </article>
+
         </div>
       </div>
     </section>
