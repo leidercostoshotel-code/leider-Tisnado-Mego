@@ -114,6 +114,29 @@
 
     html { scroll-behavior:smooth; }
 
+
+    body.custom-profile-cursor,
+    body.custom-profile-cursor a,
+    body.custom-profile-cursor button,
+    body.custom-profile-cursor input,
+    body.custom-profile-cursor textarea,
+    body.custom-profile-cursor select,
+    body.custom-profile-cursor [role="button"] {
+      cursor: var(--profile-cursor, auto);
+    }
+
+    @media (pointer: coarse), (hover: none) {
+      body.custom-profile-cursor,
+      body.custom-profile-cursor a,
+      body.custom-profile-cursor button,
+      body.custom-profile-cursor input,
+      body.custom-profile-cursor textarea,
+      body.custom-profile-cursor select,
+      body.custom-profile-cursor [role="button"] {
+        cursor: auto;
+      }
+    }
+
     /* ===== WhatsApp Flotante ===== */
     .wa-float {
       position:fixed; bottom:28px; right:28px; z-index:9999;
@@ -1369,5 +1392,50 @@
       .finally(() => { btn.disabled = false; btn.textContent = 'Enviar solicitud →'; });
     });
   </script>
+
+  <script>
+    (() => {
+      const isDesktopPointer = window.matchMedia('(pointer: fine) and (hover: hover)').matches;
+      if (!isDesktopPointer) return;
+
+      const cursorImage = new Image();
+      cursorImage.src = 'foto-leider.jpg';
+      cursorImage.decoding = 'async';
+
+      cursorImage.onload = () => {
+        const size = 44;
+        const canvas = document.createElement('canvas');
+        canvas.width = size;
+        canvas.height = size;
+        const ctx = canvas.getContext('2d');
+        if (!ctx) {
+          document.body.classList.add('custom-profile-cursor');
+          return;
+        }
+
+        ctx.save();
+        ctx.beginPath();
+        ctx.arc(size / 2, size / 2, (size / 2) - 4, 0, Math.PI * 2);
+        ctx.closePath();
+        ctx.clip();
+        ctx.drawImage(cursorImage, 0, 0, size, size);
+        ctx.restore();
+
+        ctx.beginPath();
+        ctx.arc(size / 2, size / 2, (size / 2) - 3, 0, Math.PI * 2);
+        ctx.lineWidth = 2;
+        ctx.strokeStyle = '#00c2ff';
+        ctx.stroke();
+
+        document.body.style.setProperty('--profile-cursor', `url(${canvas.toDataURL('image/png')}) 12 12, auto`);
+        document.body.classList.add('custom-profile-cursor');
+      };
+
+      cursorImage.onerror = () => {
+        document.body.classList.add('custom-profile-cursor');
+      };
+    })();
+  </script>
+
 </body>
 </html>
