@@ -1737,8 +1737,8 @@
       document.addEventListener('mouseleave',() => cur.classList.remove('ltm-visible'));
       document.addEventListener('mouseenter',() => { if (seen) cur.classList.add('ltm-visible'); });
       (function tick() {
-        cx += (mx - cx) * 0.13;
-        cy += (my - cy) * 0.13;
+        cx += (mx - cx) * 0.22;
+        cy += (my - cy) * 0.22;
         cur.style.left = cx + 'px';
         cur.style.top  = cy + 'px';
         requestAnimationFrame(tick);
