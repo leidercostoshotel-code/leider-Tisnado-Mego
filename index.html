@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <title>LTM Soluciones Digitales | Páginas Web, Power BI, Excel, Sistemas a Medida y Tecnología</title>
   <meta name="description" content="LTM Soluciones Digitales de Leider Tisnado Mego: diseño de páginas web, sistemas personalizados, tiendas online, Power BI, Excel a medida, Google Sheets, automatización y soluciones tecnológicas para negocios." />
   <meta name="theme-color" content="#061a44" />
@@ -27,6 +27,60 @@
     }
 
     * { box-sizing:border-box; margin:0; padding:0; }
+    /* === Custom Service Dropdown === */
+    .csd-wrapper { position:relative; }
+    .csd-trigger {
+      display:flex; align-items:center; gap:12px; cursor:pointer;
+      width:100%; border:1px solid #d8e3f0; border-radius:16px; padding:15px 16px;
+      background:#fbfdff; transition:.18s; user-select:none;
+      font-family:inherit; font-size:16px; color:#334155;
+    }
+    .csd-trigger:hover { border-color:var(--cyan); }
+    .csd-wrapper.open .csd-trigger {
+      border-color:var(--cyan); box-shadow:0 0 0 4px rgba(0,194,255,.12);
+      border-bottom-left-radius:0; border-bottom-right-radius:0;
+    }
+    .csd-trigger-icon { font-size:22px; flex-shrink:0; }
+    .csd-trigger-text { flex:1; text-align:left; }
+    .csd-trigger-text.ph { color:#94a3b8; }
+    .csd-arrow { flex-shrink:0; transition:transform .22s ease; }
+    .csd-wrapper.open .csd-arrow { transform:rotate(180deg); }
+    .csd-dropdown {
+      position:absolute; left:0; right:0; top:100%; z-index:500;
+      background:white; border:1px solid var(--cyan); border-top:none;
+      border-radius:0 0 18px 18px;
+      box-shadow:0 24px 64px rgba(8,42,104,.18);
+      overflow:hidden;
+      transform:translateY(-6px) scaleY(.94); transform-origin:top;
+      opacity:0; pointer-events:none;
+      transition:transform .22s ease, opacity .18s ease;
+    }
+    .csd-wrapper.open .csd-dropdown { transform:translateY(0) scaleY(1); opacity:1; pointer-events:auto; }
+    .csd-search-wrap { padding:12px 12px 10px; border-bottom:1px solid #eef2f7; background:#f8fbff; }
+    .csd-search {
+      width:100%; border:1px solid #d8e3f0; border-radius:12px;
+      padding:11px 40px 11px 14px; font-size:14px; font-family:inherit;
+      outline:none; background:white; transition:.18s; color:#1e293b;
+    }
+    .csd-search:focus { border-color:var(--cyan); box-shadow:0 0 0 3px rgba(0,194,255,.10); }
+    .csd-search-wrap .csd-s-icon { position:absolute; right:24px; top:50%; transform:translateY(-50%); opacity:.4; font-size:16px; pointer-events:none; }
+    .csd-search-wrap { position:relative; }
+    .csd-options { max-height:300px; overflow-y:auto; padding:6px 0; scrollbar-width:thin; scrollbar-color:rgba(0,194,255,.3) transparent; }
+    .csd-options::-webkit-scrollbar { width:5px; }
+    .csd-options::-webkit-scrollbar-thumb { background:rgba(0,194,255,.3); border-radius:99px; }
+    .csd-option {
+      display:flex; align-items:center; gap:14px; padding:11px 16px;
+      cursor:pointer; transition:background .12s; border-left:3px solid transparent;
+    }
+    .csd-option:hover, .csd-option.hov { background:#eaf7ff; border-left-color:var(--cyan); }
+    .csd-option.sel { background:#e0f2fe; border-left-color:var(--azul); }
+    .csd-opt-icon { font-size:24px; flex-shrink:0; width:30px; text-align:center; }
+    .csd-opt-info { display:flex; flex-direction:column; }
+    .csd-opt-label { font-size:14px; font-weight:700; color:#1e293b; }
+    .csd-opt-desc { font-size:12px; color:#94a3b8; margin-top:1px; }
+    .csd-no-results { padding:22px 16px; text-align:center; color:#94a3b8; font-size:14px; }
+    .csd-no-results span { display:block; font-size:28px; margin-bottom:6px; }
+
     html { scroll-behavior:smooth; }
     .form-msg {
       display:none; border-radius:18px; padding:22px 26px;
@@ -239,7 +293,7 @@
     label { font-size:13px; font-weight:850; color:#30405f; }
     input, select, textarea {
       width:100%; border:1px solid #d8e3f0; border-radius:16px; padding:15px 16px;
-      font-family:inherit; font-size:15px; outline:none; background:#fbfdff; transition:.18s;
+      font-family:inherit; font-size:16px; outline:none; background:#fbfdff; transition:.18s;
     }
     input:focus, select:focus, textarea:focus { border-color:var(--cyan); box-shadow:0 0 0 4px rgba(0,194,255,.12); }
     textarea { min-height:126px; resize:vertical; }
@@ -254,6 +308,13 @@
 
     .reveal { opacity:0; transform:translateY(22px); transition:.7s ease; }
     .reveal.visible { opacity:1; transform:translateY(0); }
+
+    .btn, button { touch-action:manipulation; -webkit-tap-highlight-color:transparent; }
+    a { -webkit-tap-highlight-color:transparent; }
+    @supports (padding: env(safe-area-inset-bottom)) {
+      footer { padding-bottom:calc(24px + env(safe-area-inset-bottom)); }
+      .topbar { padding-top:calc(9px + env(safe-area-inset-top)); }
+    }
 
     @media (max-width: 980px) {
       .topbar .container { flex-direction:column; align-items:flex-start; gap:4px; }
@@ -287,6 +348,13 @@
       .browser { min-height:auto; }
       .footer-grid { grid-template-columns:1fr; }
       .copy { flex-direction:column; }
+      .hero h1 { font-size:clamp(36px, 10vw, 52px); }
+      h2 { font-size:clamp(26px, 7vw, 38px); }
+      .about-visual { min-height:320px; }
+      .pillar { flex-direction:column; gap:12px; }
+      .plan.featured { transform:none; }
+      .contact-card, form { padding:22px; }
+      .csd-dropdown { position:fixed; left:12px; right:12px; top:auto; border-radius:16px; border:1px solid var(--cyan); }
     }
   </style>
 </head>
@@ -612,7 +680,23 @@
             <div class="field"><label for="nombre">Nombre</label><input id="nombre" name="nombre" type="text" placeholder="Tu nombre" required></div>
             <div class="field"><label for="telefono">Teléfono</label><input id="telefono" name="telefono" type="tel" placeholder="Tu WhatsApp"></div>
             <div class="field full"><label for="email">Email</label><input id="email" name="email" type="email" placeholder="tuemail@correo.com"></div>
-            <div class="field full"><label for="servicio">Servicio que necesitas</label><select id="servicio" name="servicio"><option>Diseño de página web</option><option>Tienda online / catálogo</option><option>Sistema a medida</option><option>Landing page de venta</option><option>Dashboard web / reportes</option><option>Power BI a medida</option><option>Excel a medida</option><option>Google Sheets y automatización</option><option>Mantenimiento y soporte</option></select></div>
+            <div class="field full">
+              <label>Servicio que necesitas</label>
+              <div class="csd-wrapper" id="csdWrapper">
+                <div class="csd-trigger" id="csdTrigger" role="combobox" aria-haspopup="listbox" aria-expanded="false" tabindex="0">
+                  <span class="csd-trigger-icon" id="csdTIcon">🔍</span>
+                  <span class="csd-trigger-text ph" id="csdTText">Buscar o seleccionar un servicio...</span>
+                  <svg class="csd-arrow" width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M4 6.5l5 5 5-5" stroke="#64748b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </div>
+                <div class="csd-dropdown" id="csdDropdown" role="listbox">
+                  <div class="csd-search-wrap">
+                    <input class="csd-search" id="csdSearch" type="text" placeholder="🔎  Buscar servicio..." autocomplete="off" aria-label="Buscar servicio">
+                  </div>
+                  <div class="csd-options" id="csdOptions"></div>
+                </div>
+              </div>
+              <input type="hidden" id="servicio" name="servicio" value="">
+            </div>
             <div class="field full"><label for="mensaje">Mensaje</label><textarea id="mensaje" name="mensaje" placeholder="Cuéntame qué deseas crear..."></textarea></div>
             <div class="field full"><button id="submitBtn" type="submit" class="btn btn-primary">Enviar solicitud →</button></div>
           </div>
@@ -674,18 +758,119 @@
     }, { threshold: .12 });
     document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
-    // ⚠️ REEMPLAZA esta URL con la tuya después de implementar el Apps Script (Code.gs)
     const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwUL5AxqOU1fkRK3iWWnYl0XX47PO8M5w9FOJZAX_uNIw7VzxPLTySVwV5-Zo9ejLYL/exec';
 
+    // === Custom Service Dropdown ===
+    const SERVICIOS = [
+      { icon:'💻', label:'Diseño de página web',           desc:'Sitios modernos, rápidos y adaptados a celular' },
+      { icon:'🛒', label:'Tienda online / catálogo',       desc:'Vende y recibe pedidos por internet' },
+      { icon:'⚙️', label:'Sistema a medida',               desc:'Paneles, registros y automatizaciones' },
+      { icon:'🚀', label:'Landing page de venta',          desc:'Páginas de alto impacto para campañas' },
+      { icon:'📊', label:'Dashboard web / reportes',       desc:'KPIs y métricas en tiempo real' },
+      { icon:'📈', label:'Power BI a medida',              desc:'Dashboards interactivos con tus datos reales' },
+      { icon:'📗', label:'Excel a medida',                 desc:'Plantillas, macros VBA y automatizaciones' },
+      { icon:'☁️', label:'Google Sheets y automatización', desc:'Soluciones colaborativas en la nube' },
+      { icon:'🛡️', label:'Mantenimiento y soporte',        desc:'Actualizaciones y acompañamiento continuo' },
+    ];
+
+    (function() {
+      const wrap    = document.getElementById('csdWrapper');
+      const trigger = document.getElementById('csdTrigger');
+      const tIcon   = document.getElementById('csdTIcon');
+      const tText   = document.getElementById('csdTText');
+      const drop    = document.getElementById('csdDropdown');
+      const search  = document.getElementById('csdSearch');
+      const optsCnt = document.getElementById('csdOptions');
+      const hidden  = document.getElementById('servicio');
+      let hov = -1;
+
+      function hl(str, q) {
+        if (!q) return str;
+        return str.replace(new RegExp('(' + q.replace(/[.*+?^${}()|[\]\\]/g,'\\$&') + ')', 'gi'),
+          '<mark style="background:#bfdbfe;border-radius:3px;padding:0 2px;color:#1e293b">$1</mark>');
+      }
+
+      function render(q) {
+        q = (q || '').toLowerCase().trim();
+        const list = SERVICIOS.filter(s =>
+          s.label.toLowerCase().includes(q) || s.desc.toLowerCase().includes(q)
+        );
+        if (!list.length) {
+          optsCnt.innerHTML = '<div class="csd-no-results"><span>🔍</span>No se encontró ese servicio</div>';
+          return;
+        }
+        optsCnt.innerHTML = list.map((s, i) => `
+          <div class="csd-option" role="option" data-label="${s.label}" data-icon="${s.icon}" data-i="${i}">
+            <span class="csd-opt-icon">${s.icon}</span>
+            <div class="csd-opt-info">
+              <span class="csd-opt-label">${hl(s.label, q)}</span>
+              <span class="csd-opt-desc">${s.desc}</span>
+            </div>
+          </div>`).join('');
+        hov = -1;
+        optsCnt.querySelectorAll('.csd-option').forEach(o => {
+          o.addEventListener('pointerdown', e => { e.preventDefault(); pick(o.dataset.label, o.dataset.icon); });
+          o.addEventListener('mouseover', () => { setHov(parseInt(o.dataset.i)); });
+        });
+      }
+
+      function setHov(idx) {
+        optsCnt.querySelectorAll('.csd-option').forEach(o => o.classList.remove('hov'));
+        hov = idx;
+        const o = optsCnt.querySelector('[data-i="' + idx + '"]');
+        if (o) { o.classList.add('hov'); o.scrollIntoView({ block:'nearest' }); }
+      }
+
+      function pick(label, icon) {
+        tText.textContent = label;
+        tText.classList.remove('ph');
+        tIcon.textContent = icon;
+        hidden.value = label;
+        optsCnt.querySelectorAll('.csd-option').forEach(o =>
+          o.classList.toggle('sel', o.dataset.label === label));
+        close();
+      }
+
+      function open() {
+        wrap.classList.add('open');
+        trigger.setAttribute('aria-expanded', 'true');
+        search.value = '';
+        render('');
+        setTimeout(() => search.focus(), 60);
+      }
+
+      function close() {
+        wrap.classList.remove('open');
+        trigger.setAttribute('aria-expanded', 'false');
+        hov = -1;
+      }
+
+      trigger.addEventListener('click', () => wrap.classList.contains('open') ? close() : open());
+      trigger.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); open(); } });
+
+      search.addEventListener('input', () => render(search.value));
+      search.addEventListener('keydown', e => {
+        const opts = optsCnt.querySelectorAll('.csd-option');
+        if (e.key === 'ArrowDown') { e.preventDefault(); setHov(Math.min(hov + 1, opts.length - 1)); }
+        else if (e.key === 'ArrowUp') { e.preventDefault(); setHov(Math.max(hov - 1, 0)); }
+        else if (e.key === 'Enter') { e.preventDefault(); if (hov >= 0 && opts[hov]) pick(opts[hov].dataset.label, opts[hov].dataset.icon); }
+        else if (e.key === 'Escape') close();
+      });
+
+      document.addEventListener('pointerdown', e => { if (!wrap.contains(e.target)) close(); });
+      render('');
+    })();
+
+    // === Contact Form Submit ===
     document.getElementById('contactForm').addEventListener('submit', function(e) {
       e.preventDefault();
-      const form       = this;
-      const btn        = document.getElementById('submitBtn');
-      const successEl  = document.getElementById('formSuccess');
-      const errorEl    = document.getElementById('formError');
+      const form      = this;
+      const btn       = document.getElementById('submitBtn');
+      const successEl = document.getElementById('formSuccess');
+      const errorEl   = document.getElementById('formError');
 
-      btn.disabled     = true;
-      btn.textContent  = 'Enviando...';
+      btn.disabled    = true;
+      btn.textContent = 'Enviando...';
       successEl.style.display = 'none';
       errorEl.style.display   = 'none';
 
@@ -698,15 +883,14 @@
       .then(() => {
         successEl.style.display = 'block';
         form.reset();
-        successEl.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        document.getElementById('csdTIcon').textContent = '🔍';
+        document.getElementById('csdTText').textContent = 'Buscar o seleccionar un servicio...';
+        document.getElementById('csdTText').classList.add('ph');
+        document.getElementById('servicio').value = '';
+        successEl.scrollIntoView({ behavior:'smooth', block:'nearest' });
       })
-      .catch(() => {
-        errorEl.style.display = 'block';
-      })
-      .finally(() => {
-        btn.disabled    = false;
-        btn.textContent = 'Enviar solicitud →';
-      });
+      .catch(() => { errorEl.style.display = 'block'; })
+      .finally(() => { btn.disabled = false; btn.textContent = 'Enviar solicitud →'; });
     });
   </script>
 </body>
