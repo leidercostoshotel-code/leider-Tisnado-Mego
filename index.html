@@ -82,6 +82,116 @@
     .csd-no-results span { display:block; font-size:28px; margin-bottom:6px; }
 
     html { scroll-behavior:smooth; }
+
+    /* ===== Service Showcase Carousel ===== */
+    .svc-showcase {
+      position:relative; overflow:hidden;
+      height:clamp(500px, 58vw, 700px);
+      background:#061a44;
+    }
+    .svc-track {
+      display:flex; height:100%;
+      transition:transform .78s cubic-bezier(.4,0,.2,1);
+      will-change:transform;
+    }
+    .svc-slide {
+      min-width:100%; height:100%; position:relative;
+      display:flex; align-items:center; overflow:hidden;
+    }
+    .svc-slide::before {
+      content:''; position:absolute; border-radius:50%;
+      width:700px; height:700px; right:-220px; top:-240px;
+      background:rgba(255,255,255,.07); pointer-events:none;
+    }
+    .svc-slide::after {
+      content:''; position:absolute; border-radius:50%;
+      width:360px; height:360px; left:-120px; bottom:-120px;
+      background:rgba(255,255,255,.05); pointer-events:none;
+    }
+    .svc-inner {
+      width:min(1180px, calc(100% - 48px)); margin:auto;
+      display:grid; grid-template-columns:1fr 1fr; gap:60px;
+      align-items:center; position:relative; z-index:1;
+    }
+    .svc-copy { color:white; }
+    .svc-tag {
+      display:inline-flex; align-items:center;
+      background:rgba(255,255,255,.14); backdrop-filter:blur(10px);
+      border:1px solid rgba(255,255,255,.22);
+      padding:9px 18px; border-radius:999px; margin-bottom:22px;
+      font-size:12px; font-weight:800; text-transform:uppercase; letter-spacing:.1em;
+    }
+    .svc-name {
+      font-size:clamp(30px, 4.2vw, 58px); font-weight:900;
+      line-height:.96; letter-spacing:-.045em; margin-bottom:18px;
+    }
+    .svc-desc {
+      font-size:17px; line-height:1.68; opacity:.82;
+      margin-bottom:26px; max-width:490px;
+    }
+    .svc-feats { list-style:none; display:grid; gap:11px; margin-bottom:34px; }
+    .svc-feats li {
+      display:flex; align-items:center; gap:11px;
+      font-weight:700; font-size:15px;
+    }
+    .svc-feats li::before {
+      content:''; display:inline-block;
+      width:7px; height:7px; border-radius:50%;
+      background:rgba(255,255,255,.65); flex-shrink:0;
+    }
+    .svc-visual { display:flex; justify-content:center; align-items:center; }
+    .svc-emoji {
+      font-size:clamp(110px, 14vw, 190px); line-height:1;
+      filter:drop-shadow(0 24px 60px rgba(0,0,0,.35));
+      animation:svc-float 5s ease-in-out infinite;
+      display:block; user-select:none;
+    }
+    @keyframes svc-float {
+      0%,100% { transform:translateY(0) rotate(-2deg); }
+      50%      { transform:translateY(-18px) rotate(2deg); }
+    }
+    .svc-nav {
+      position:absolute; top:50%; transform:translateY(-50%);
+      width:54px; height:54px; border-radius:50%; z-index:10;
+      background:rgba(255,255,255,.13); backdrop-filter:blur(14px);
+      border:1px solid rgba(255,255,255,.22);
+      color:white; cursor:pointer; display:flex;
+      align-items:center; justify-content:center;
+      transition:.22s; touch-action:manipulation;
+    }
+    .svc-nav:hover { background:rgba(255,255,255,.26); transform:translateY(-50%) scale(1.1); }
+    .svc-prev { left:22px; }
+    .svc-next { right:22px; }
+    .svc-dots {
+      position:absolute; bottom:28px; left:50%; transform:translateX(-50%);
+      display:flex; gap:9px; z-index:10;
+    }
+    .svc-dot {
+      width:8px; height:8px; border-radius:99px;
+      background:rgba(255,255,255,.32); cursor:pointer;
+      transition:.28s ease; border:none; padding:0; touch-action:manipulation;
+    }
+    .svc-dot.on { width:30px; background:white; }
+    .svc-bar {
+      position:absolute; bottom:0; left:0; height:3px;
+      background:rgba(255,255,255,.55); width:0;
+    }
+    .svc-bar.running { animation:svc-prog var(--dur,4500ms) linear forwards; }
+    @keyframes svc-prog { to { width:100%; } }
+    .svc-counter {
+      position:absolute; top:24px; right:28px; z-index:10;
+      color:rgba(255,255,255,.55); font-size:13px; font-weight:700; letter-spacing:.06em;
+    }
+    @media (max-width:768px) {
+      .svc-showcase { height:auto; min-height:520px; }
+      .svc-inner { grid-template-columns:1fr; gap:20px; text-align:center; padding:56px 0 86px; }
+      .svc-visual { order:-1; }
+      .svc-emoji { font-size:clamp(72px, 22vw, 110px); }
+      .svc-feats li { justify-content:center; }
+      .svc-desc { margin-inline:auto; }
+      .svc-nav { display:none; }
+    }
+
     .form-msg {
       display:none; border-radius:18px; padding:22px 26px;
       font-weight:700; font-size:15px; text-align:center; margin-top:18px;
@@ -426,7 +536,20 @@
       </div>
     </section>
 
-    <section class="section" id="servicios">
+    <section class="svc-showcase" id="servicios" aria-label="Servicios LTM">
+      <div class="svc-track" id="svcTrack"></div>
+      <button class="svc-nav svc-prev" id="svcPrev" aria-label="Servicio anterior">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+      </button>
+      <button class="svc-nav svc-next" id="svcNext" aria-label="Siguiente servicio">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+      </button>
+      <div class="svc-dots" id="svcDots"></div>
+      <div class="svc-bar" id="svcBar"></div>
+      <div class="svc-counter" id="svcCounter">1 / 9</div>
+    </section>
+
+    <section class="section" id="todos-los-servicios">
       <div class="container">
         <div class="section-title center reveal">
           <div class="eyebrow">Servicios digitales</div>
@@ -759,6 +882,94 @@
     document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
     const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwUL5AxqOU1fkRK3iWWnYl0XX47PO8M5w9FOJZAX_uNIw7VzxPLTySVwV5-Zo9ejLYL/exec';
+
+    // ===== Service Showcase Carousel =====
+    (function() {
+      const DATA = [
+        { icon:'💻', name:'Diseño de páginas web',           tag:'Web Profesional',       desc:'Sitios modernos, rápidos y adaptados a todos los dispositivos. Transmiten confianza desde el primer clic.', feats:['Diseño corporativo premium','Secciones y galerías profesionales','Integración WhatsApp y contacto'], bg:'linear-gradient(135deg,#061a44 0%,#0b3b91 55%,#006aaa 100%)', cta:'Quiero mi web' },
+        { icon:'🛒', name:'Tiendas online',                  tag:'E-commerce',             desc:'Catálogos digitales para mostrar productos, recibir pedidos y aumentar tus ventas por internet.', feats:['Productos, categorías y precios','Pedidos por WhatsApp o carrito','Diseño enfocado en conversión'], bg:'linear-gradient(135deg,#2d1b69 0%,#6d28d9 55%,#8b5cf6 100%)', cta:'Quiero mi tienda' },
+        { icon:'⚙️', name:'Sistemas a medida',               tag:'Software Personalizado', desc:'Herramientas digitales a tu medida para gestionar tu negocio, controlar procesos y ahorrar horas de trabajo.', feats:['Paneles administrativos','Registro y control de datos','Automatizaciones internas'], bg:'linear-gradient(135deg,#0f2027 0%,#203a43 50%,#2c5364 100%)', cta:'Necesito un sistema' },
+        { icon:'🚀', name:'Landing pages de venta',          tag:'Alta Conversión',        desc:'Páginas de alto impacto para campañas y servicios que convierten visitantes en clientes reales.', feats:['Copy comercial estratégico','Diseño rápido y directo','CTA y formularios optimizados'], bg:'linear-gradient(135deg,#7f1d1d 0%,#c2410c 50%,#ea580c 100%)', cta:'Quiero mi landing' },
+        { icon:'📊', name:'Dashboards web y reportes',       tag:'Datos en Tiempo Real',   desc:'Paneles interactivos con tus indicadores clave para tomar decisiones rápidas e informadas.', feats:['KPIs personalizados','Gráficos y tablas dinámicas','Control de ingresos y procesos'], bg:'linear-gradient(135deg,#052e16 0%,#14532d 50%,#16a34a 100%)', cta:'Quiero mi dashboard' },
+        { icon:'📈', name:'Power BI a medida',               tag:'Business Intelligence',  desc:'Dashboards profesionales en Power BI conectados a tus datos reales para análisis avanzado de negocio.', feats:['Dashboards interactivos y filtros','Conexión a Excel, SQL, web y más','Reportes automáticos y actualizados'], bg:'linear-gradient(135deg,#451a03 0%,#92400e 50%,#d97706 100%)', cta:'Quiero Power BI' },
+        { icon:'📗', name:'Excel a medida',                  tag:'Automatización Office',  desc:'Planillas profesionales con fórmulas avanzadas, macros y automatizaciones que simplifican tu trabajo.', feats:['Plantillas personalizadas','Macros VBA y automatizaciones','Cálculos y cuadros de mando'], bg:'linear-gradient(135deg,#14532d 0%,#166534 50%,#15803d 100%)', cta:'Quiero mi Excel' },
+        { icon:'☁️', name:'Google Sheets y automatización', tag:'Soluciones en la Nube',  desc:'Hojas de cálculo colaborativas con Apps Script para gestionar tu negocio desde cualquier lugar.', feats:['Hojas colaborativas en tiempo real','Automatización con Apps Script','Integración Google Forms y Drive'], bg:'linear-gradient(135deg,#1e3a5f 0%,#1d4ed8 50%,#3b82f6 100%)', cta:'Quiero Google Sheets' },
+        { icon:'🛡️', name:'Mantenimiento y soporte',        tag:'Acompañamiento Continuo', desc:'Actualizaciones, mejoras y optimización continua para que tu proyecto siempre funcione perfecto.', feats:['Mejoras visuales y funcionales','Corrección de errores rápida','Acompañamiento personalizado'], bg:'linear-gradient(135deg,#1e1b4b 0%,#312e81 50%,#4c1d95 100%)', cta:'Quiero soporte' },
+      ];
+
+      const showcase = document.getElementById('svcShowcase') || document.querySelector('.svc-showcase');
+      const track    = document.getElementById('svcTrack');
+      const dotsEl   = document.getElementById('svcDots');
+      const bar      = document.getElementById('svcBar');
+      const counter  = document.getElementById('svcCounter');
+      if (!track) return;
+
+      const DELAY = 4500;
+      let cur = 0, timer = null, paused = false, touchX = 0;
+
+      DATA.forEach((s, i) => {
+        const sl = document.createElement('div');
+        sl.className = 'svc-slide';
+        sl.style.background = s.bg;
+        sl.innerHTML = `
+          <div class="svc-inner">
+            <div class="svc-copy">
+              <div class="svc-tag">${s.tag}</div>
+              <div class="svc-name">${s.name}</div>
+              <p class="svc-desc">${s.desc}</p>
+              <ul class="svc-feats">${s.feats.map(f => `<li>${f}</li>`).join('')}</ul>
+              <a href="#contacto" class="btn btn-primary" style="display:inline-flex;background:rgba(255,255,255,.18);backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,.3);color:white;box-shadow:none;" onmouseover="this.style.background='rgba(255,255,255,.28)'" onmouseout="this.style.background='rgba(255,255,255,.18)'">${s.cta} →</a>
+            </div>
+            <div class="svc-visual">
+              <span class="svc-emoji">${s.icon}</span>
+            </div>
+          </div>`;
+        track.appendChild(sl);
+
+        const dot = document.createElement('button');
+        dot.className = 'svc-dot' + (i === 0 ? ' on' : '');
+        dot.setAttribute('aria-label', 'Ver ' + s.name);
+        dot.addEventListener('click', () => goTo(i, true));
+        dotsEl.appendChild(dot);
+      });
+
+      function resetBar() {
+        bar.classList.remove('running');
+        bar.style.setProperty('--dur', DELAY + 'ms');
+        void bar.offsetWidth;
+        if (!paused) bar.classList.add('running');
+      }
+
+      function goTo(idx, manual) {
+        cur = ((idx % DATA.length) + DATA.length) % DATA.length;
+        track.style.transform = `translateX(-${cur * 100}%)`;
+        dotsEl.querySelectorAll('.svc-dot').forEach((d, i) => d.classList.toggle('on', i === cur));
+        if (counter) counter.textContent = (cur + 1) + ' / ' + DATA.length;
+        resetBar();
+        if (manual) { clearInterval(timer); if (!paused) startTimer(); }
+      }
+
+      function startTimer() { timer = setInterval(() => goTo(cur + 1), DELAY); }
+
+      document.getElementById('svcPrev')?.addEventListener('click', () => goTo(cur - 1, true));
+      document.getElementById('svcNext')?.addEventListener('click', () => goTo(cur + 1, true));
+
+      showcase?.addEventListener('mouseenter', () => {
+        paused = true; clearInterval(timer); bar.classList.remove('running');
+      });
+      showcase?.addEventListener('mouseleave', () => {
+        paused = false; resetBar(); startTimer();
+      });
+
+      track.addEventListener('touchstart', e => { touchX = e.touches[0].clientX; }, { passive:true });
+      track.addEventListener('touchend', e => {
+        const dx = e.changedTouches[0].clientX - touchX;
+        if (Math.abs(dx) > 44) goTo(dx < 0 ? cur + 1 : cur - 1, true);
+      }, { passive:true });
+
+      resetBar();
+      startTimer();
+    })();
 
     // === Custom Service Dropdown ===
     const SERVICIOS = [
