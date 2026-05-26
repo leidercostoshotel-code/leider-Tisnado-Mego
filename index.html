@@ -96,6 +96,56 @@
         "target": "https://leidertisnado.com/?q={search_term_string}",
         "query-input": "required name=search_term_string"
       }
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "ItemList",
+      "name": "Menú principal",
+      "itemListElement": [
+        { "@type": "SiteNavigationElement", "position": 1, "name": "Inicio",           "url": "https://leidertisnado.com/#inicio" },
+        { "@type": "SiteNavigationElement", "position": 2, "name": "Servicios",        "url": "https://leidertisnado.com/#servicios" },
+        { "@type": "SiteNavigationElement", "position": 3, "name": "Nosotros",         "url": "https://leidertisnado.com/#nosotros" },
+        { "@type": "SiteNavigationElement", "position": 4, "name": "Proyectos",        "url": "https://leidertisnado.com/#proyectos" },
+        { "@type": "SiteNavigationElement", "position": 5, "name": "Planes y Precios", "url": "https://leidertisnado.com/#planes" },
+        { "@type": "SiteNavigationElement", "position": 6, "name": "Contacto",         "url": "https://leidertisnado.com/#contacto" },
+        { "@type": "SiteNavigationElement", "position": 7, "name": "Preguntas Frecuentes", "url": "https://leidertisnado.com/#faq" }
+      ]
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "¿Cuánto tiempo tarda en estar lista mi página web?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Depende del tipo de proyecto. Una landing page o web de presentación puede estar lista en 5 a 10 días hábiles. Una web empresarial completa entre 2 y 4 semanas. Los sistemas a medida se estiman según los requerimientos." }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Necesito tener hosting o dominio propio?",
+          "acceptedAnswer": { "@type": "Answer", "text": "No es obligatorio que lo tengas. Puedo asesorarte para conseguir el dominio y hosting adecuado según tu presupuesto, o trabajar con lo que ya tienes. Te explico todo el proceso sin tecnicismos." }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Puedo pedir cambios después de entregado el proyecto?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Sí. Todos los proyectos incluyen un período de ajustes sin costo adicional. Además, ofrezco planes de mantenimiento y soporte continuo para cambios futuros." }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Cómo es el proceso de pago?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Generalmente trabajamos con un 50% al inicio y el 50% restante al entregar el proyecto terminado. Para proyectos grandes se puede acordar un plan de pagos en cuotas. Acepto transferencias bancarias y Yape/Plin." }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Trabajas con clientes de otras ciudades o países?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Sí, trabajo de forma 100% remota. Tengo clientes en distintas ciudades del Perú y también en el extranjero. Todo el proceso se coordina por WhatsApp, correo o videollamada." }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Puedo empezar con un presupuesto pequeño?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Sí. Tengo planes desde S/ 350 que ya incluyen una presencia digital profesional. También podemos ir construyendo tu proyecto por etapas para distribuir la inversión en el tiempo." }
+        }
+      ]
     }
   ]
   </script>
@@ -1367,7 +1417,7 @@
     </div>
 
     <!-- FAQ -->
-    <section class="section faq-section">
+    <section class="section faq-section" id="faq">
       <div class="container">
         <div class="section-title center reveal">
           <div class="eyebrow">Preguntas frecuentes</div>
