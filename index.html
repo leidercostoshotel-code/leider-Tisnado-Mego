@@ -392,11 +392,7 @@
       overflow-x:hidden;
       line-height:1.6;
     }
-    .bg-watermark {
-      position:fixed; inset:0; pointer-events:none; z-index:-1;
-      background:url('logo.png') center center / 420px no-repeat;
-      opacity:.07;
-    }
+    .bg-watermark { display:none; }
     a { color:inherit; text-decoration:none; }
     img { max-width:100%; display:block; }
     .container { width:min(1180px, calc(100% - 40px)); margin:auto; }
@@ -408,7 +404,7 @@
       letter-spacing:.08em; text-transform:uppercase;
       border:1px solid rgba(0, 194, 255, .22);
     }
-    .pill::before { content:'✦'; color:var(--cyan); font-size:15px; }
+    .pill::before { content:''; width:8px; height:8px; border-radius:50%; background:var(--cyan); display:inline-block; }
     .btn {
       display:inline-flex; justify-content:center; align-items:center; gap:10px;
       padding:15px 22px; border-radius:999px;
@@ -494,9 +490,12 @@
     .code-line:nth-child(3) { width:86%; }
     .circle-metric { width:90px; height:90px; border-radius:50%; background:conic-gradient(from 180deg, #00c2ff, #0d6efd, #ffffff20 78%); display:grid; place-items:center; font-weight:900; }
     .mini-grid { display:grid; grid-template-columns:repeat(2, 1fr); gap:14px; }
-    .mini-card { background:rgba(255,255,255,.08); border:1px solid rgba(255,255,255,.10); border-radius:20px; padding:18px; }
-    .mini-card b { display:block; font-size:28px; color:#fff; }
-    .mini-card span { color:#b8dcff; font-size:13px; }
+    .mini-card { background:rgba(255,255,255,.08); border:1px solid rgba(255,255,255,.10); border-radius:20px; padding:18px; transition:.2s; }
+    .mini-card:hover { background:rgba(255,255,255,.14); border-color:rgba(0,194,255,.35); }
+    .mc-label { display:flex; align-items:center; gap:8px; margin-bottom:6px; }
+    .mc-label svg { width:15px; height:15px; stroke:#00c2ff; flex-shrink:0; }
+    .mini-card b { font-size:13px; font-weight:800; color:#fff; letter-spacing:.04em; text-transform:uppercase; }
+    .mini-card span { color:#b8dcff; font-size:12px; line-height:1.4; display:block; }
     .floating-badge { position:absolute; right:18px; bottom:22px; background:white; color:var(--azul-noche); border-radius:18px; padding:14px 16px; box-shadow:0 14px 34px rgba(8,42,104,.18); font-weight:900; display:flex; align-items:center; gap:10px; }
     .floating-badge i { width:34px; height:34px; border-radius:12px; background:var(--gradiente); display:grid; place-items:center; color:white; font-style:normal; }
 
@@ -557,12 +556,13 @@
     }
     .icon {
       width:58px; height:58px; border-radius:18px;
-      background:white; border:2px solid rgba(8,42,104,.07);
-      box-shadow:0 8px 24px rgba(8,42,104,.16);
-      display:grid; place-items:center; font-size:28px;
+      background:white; border:1.5px solid rgba(8,42,104,.08);
+      box-shadow:0 6px 20px rgba(8,42,104,.12);
+      display:grid; place-items:center;
       position:relative; z-index:3;
       margin:-29px 0 0 22px; flex-shrink:0;
     }
+    .icon svg { width:26px; height:26px; stroke:var(--azul); }
     .sc-body { padding:16px 24px 26px; flex:1; display:flex; flex-direction:column; }
     .sc-body h3 { margin-bottom:9px; }
     .service-card p { margin:0 0 16px; flex:1; }
@@ -664,7 +664,8 @@
     .contact-card, form { background:white; border-radius:30px; padding:30px; box-shadow:var(--sombra); border:1px solid rgba(8,42,104,.08); }
     .contact-item { display:flex; gap:14px; padding:18px 0; border-bottom:1px solid #eef2f7; }
     .contact-item:last-child { border-bottom:0; }
-    .contact-item i { width:44px; height:44px; border-radius:16px; background:#eaf7ff; display:grid; place-items:center; font-style:normal; }
+    .contact-item i { width:44px; height:44px; border-radius:16px; background:#eaf7ff; display:grid; place-items:center; font-style:normal; flex-shrink:0; }
+    .contact-item i svg { width:20px; height:20px; stroke:var(--azul); }
     .form-grid { display:grid; grid-template-columns:1fr 1fr; gap:16px; }
     .field { display:flex; flex-direction:column; gap:8px; }
     .field.full { grid-column:1 / -1; }
@@ -698,7 +699,8 @@
       background:rgba(255,255,255,.10); border:1px solid rgba(255,255,255,.2);
       border-radius:20px; padding:20px 28px;
     }
-    .garantia-badge .g-icon { font-size:36px; }
+    .garantia-badge .g-icon { display:grid; place-items:center; width:48px; height:48px; background:rgba(255,255,255,.15); border-radius:16px; flex-shrink:0; }
+    .garantia-badge .g-icon svg { width:26px; height:26px; stroke:white; }
     .garantia-badge h3 { font-size:18px; font-weight:900; margin-bottom:4px; }
     .garantia-badge p { color:rgba(255,255,255,.75); font-size:13px; margin:0; }
 
@@ -814,8 +816,6 @@
   </style>
 </head>
 <body>
-  <div class="bg-watermark" aria-hidden="true"></div>
-
   <!-- Botón flotante WhatsApp -->
   <div class="wa-float" role="complementary" aria-label="Contactar por WhatsApp">
     <div class="wa-tooltip">💬 ¡Escríbeme por WhatsApp!</div>
@@ -823,13 +823,6 @@
       <div class="wa-pulse"></div>
       <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
     </a>
-  </div>
-
-  <div class="topbar">
-    <div class="container">
-      <span><b>LTM Soluciones Digitales</b> · Páginas web · Power BI · Excel · Sistemas a medida</span>
-      <span>📍 Lima, Perú · <a href="https://wa.me/51961186204" target="_blank" rel="noopener" style="color:var(--cyan);font-weight:800;">📱 +51 961 186 204</a> · ✉️ leidercostoshotel@gmail.com</span>
-    </div>
   </div>
 
   <header>
@@ -879,10 +872,10 @@
                 <div class="circle-metric">100%</div>
               </div>
               <div class="mini-grid">
-                <div class="mini-card"><b><span class="mc-icon">🌐</span>Web</b><span>Diseño profesional responsive</span></div>
-                <div class="mini-card"><b><span class="mc-icon">📈</span>SEO</b><span>Base optimizada para Google</span></div>
-                <div class="mini-card"><b><span class="mc-icon">🤝</span>CRM</b><span>Formularios y captación de clientes</span></div>
-                <div class="mini-card"><b><span class="mc-icon">📊</span>Data</b><span>Reportes, control y automatización</span></div>
+                <div class="mini-card"><div class="mc-label"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg><b>Web</b></div><span>Diseño profesional responsive</span></div>
+                <div class="mini-card"><div class="mc-label"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg><b>SEO</b></div><span>Optimizado para Google</span></div>
+                <div class="mini-card"><div class="mc-label"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg><b>CRM</b></div><span>Captación de clientes</span></div>
+                <div class="mini-card"><div class="mc-label"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/><line x1="2" y1="20" x2="22" y2="20"/></svg><b>Data</b></div><span>Reportes y automatización</span></div>
               </div>
               <div class="floating-badge"><i>✓</i> Solución lista para vender</div>
             </div>
@@ -915,7 +908,7 @@
         <div class="services-grid">
           <article class="service-card reveal" data-num=".01">
             <div class="service-media"><img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=800&q=80" alt="Diseño de páginas web" loading="lazy"></div>
-            <div class="icon">💻</div>
+            <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg></div>
             <div class="sc-body">
               <h3>Diseño de páginas web</h3>
               <p>Sitios modernos, rápidos y adaptados a celular, tablet y escritorio.</p>
@@ -930,7 +923,7 @@
 
           <article class="service-card reveal" data-num=".02">
             <div class="service-media"><img src="https://images.unsplash.com/photo-1472851294608-062f824d29cc?auto=format&fit=crop&w=800&q=80" alt="Tiendas online" loading="lazy"></div>
-            <div class="icon">🛒</div>
+            <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg></div>
             <div class="sc-body">
               <h3>Tiendas online</h3>
               <p>Catálogos digitales para mostrar productos, recibir pedidos y mejorar tus ventas.</p>
@@ -945,7 +938,7 @@
 
           <article class="service-card reveal" data-num=".03">
             <div class="service-media"><img src="https://images.unsplash.com/photo-1587620962725-abab7fe55159?auto=format&fit=crop&w=800&q=80" alt="Sistemas a medida" loading="lazy"></div>
-            <div class="icon">⚙️</div>
+            <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 012.83-2.83l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 2.83l-.06.06A1.65 1.65 0 0019.4 9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z"/></svg></div>
             <div class="sc-body">
               <h3>Sistemas a medida</h3>
               <p>Herramientas personalizadas para controlar información, procesos, reportes y operaciones.</p>
@@ -960,7 +953,7 @@
 
           <article class="service-card reveal" data-num=".04">
             <div class="service-media"><img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=800&q=80" alt="Landing pages de venta" loading="lazy"></div>
-            <div class="icon">🚀</div>
+            <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg></div>
             <div class="sc-body">
               <h3>Landing pages de venta</h3>
               <p>Páginas de alto impacto para campañas, promociones, anuncios o servicios específicos.</p>
@@ -975,7 +968,7 @@
 
           <article class="service-card reveal" data-num=".05">
             <div class="service-media"><img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=800&q=80" alt="Dashboards web y reportes" loading="lazy"></div>
-            <div class="icon">📊</div>
+            <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/><line x1="2" y1="20" x2="22" y2="20"/></svg></div>
             <div class="sc-body">
               <h3>Dashboards web y reportes</h3>
               <p>Paneles interactivos en tu web para visualizar tus datos en tiempo real.</p>
@@ -990,7 +983,7 @@
 
           <article class="service-card reveal" data-num=".06">
             <div class="service-media"><img src="https://images.unsplash.com/photo-1563013544-824ae1b704d3?auto=format&fit=crop&w=800&q=80" alt="Mantenimiento y soporte" loading="lazy"></div>
-            <div class="icon">🛡️</div>
+            <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
             <div class="sc-body">
               <h3>Mantenimiento y soporte</h3>
               <p>Actualizaciones, mejoras, respaldo, optimización y acompañamiento continuo.</p>
@@ -1005,7 +998,7 @@
 
           <article class="service-card reveal" data-num=".07">
             <div class="service-media"><img src="https://images.unsplash.com/photo-1554224155-6726b3ff858f?auto=format&fit=crop&w=800&q=80" alt="Power BI a medida" loading="lazy"></div>
-            <div class="icon">📈</div>
+            <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg></div>
             <div class="sc-body">
               <h3>Power BI a medida</h3>
               <p>Dashboards profesionales en Power BI con tus datos reales para decisiones inteligentes.</p>
@@ -1020,7 +1013,7 @@
 
           <article class="service-card reveal" data-num=".08">
             <div class="service-media"><img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=800&q=80" alt="Excel a medida" loading="lazy"></div>
-            <div class="icon">📗</div>
+            <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M3 15h18M9 3v18M15 3v18"/></svg></div>
             <div class="sc-body">
               <h3>Excel a medida</h3>
               <p>Planillas profesionales con fórmulas avanzadas, macros y automatizaciones.</p>
@@ -1035,7 +1028,7 @@
 
           <article class="service-card reveal" data-num=".09">
             <div class="service-media"><img src="https://images.unsplash.com/photo-1484417894907-623942c8ee29?auto=format&fit=crop&w=800&q=80" alt="Google Sheets y automatización" loading="lazy"></div>
-            <div class="icon">☁️</div>
+            <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M18 10h-1.26A8 8 0 109 20h9a5 5 0 000-10z"/></svg></div>
             <div class="sc-body">
               <h3>Google Sheets y automatización</h3>
               <p>Soluciones en la nube con Google Sheets y Apps Script para gestionar tu negocio desde cualquier lugar.</p>
@@ -1050,7 +1043,7 @@
 
           <article class="service-card reveal" data-num=".10">
             <div class="service-media"><img src="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&w=800&q=80" alt="Sistema de inventarios" loading="lazy"></div>
-            <div class="icon">📦</div>
+            <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><line x1="16.5" y1="9.4" x2="7.5" y2="4.21"/><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 002 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg></div>
             <div class="sc-body">
               <h3>Sistema de inventarios</h3>
               <p>Aplicación web para controlar tu stock en tiempo real: entradas, salidas, alertas y reportes.</p>
@@ -1065,7 +1058,7 @@
 
           <article class="service-card reveal" data-num=".11">
             <div class="service-media"><img src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?auto=format&fit=crop&w=800&q=80" alt="Punto de venta" loading="lazy"></div>
-            <div class="icon">🖥️</div>
+            <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg></div>
             <div class="sc-body">
               <h3>Sistema punto de venta (POS)</h3>
               <p>App completa para registrar ventas, cobrar, gestionar caja, clientes y productos en un solo lugar.</p>
@@ -1080,7 +1073,7 @@
 
           <article class="service-card reveal" data-num=".12">
             <div class="service-media"><img src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?auto=format&fit=crop&w=800&q=80" alt="Sistema para restaurantes" loading="lazy"></div>
-            <div class="icon">🍽️</div>
+            <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 2v7c0 1.1.9 2 2 2h4a2 2 0 002-2V2"/><line x1="7" y1="2" x2="7" y2="22"/><path d="M21 15V2a5 5 0 00-5 5v6c0 1.1.9 2 2 2h3zm0 0v7"/></svg></div>
             <div class="sc-body">
               <h3>Sistema para restaurantes</h3>
               <p>Gestión de mesas, pedidos, cocina y caja integrados en una sola aplicación web.</p>
@@ -1095,7 +1088,7 @@
 
           <article class="service-card reveal" data-num=".13">
             <div class="service-media"><img src="https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=800&q=80" alt="Sistema para hoteles" loading="lazy"></div>
-            <div class="icon">🏨</div>
+            <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2" width="16" height="20" rx="2"/><path d="M9 22v-4h6v4"/><path d="M8 6h.01M16 6h.01M12 6h.01M8 10h.01M16 10h.01M12 10h.01M8 14h.01M16 14h.01M12 14h.01"/></svg></div>
             <div class="sc-body">
               <h3>Sistema para hoteles</h3>
               <p>Control completo de reservas, check-in, check-out, habitaciones y facturación para tu hotel o hostal.</p>
@@ -1110,7 +1103,7 @@
 
           <article class="service-card reveal" data-num=".14">
             <div class="service-media"><img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=800&q=80" alt="Sistema para agencias" loading="lazy"></div>
-            <div class="icon">🏢</div>
+            <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v16"/></svg></div>
             <div class="sc-body">
               <h3>Sistema para agencias</h3>
               <p>Plataforma web para agencias de viaje, publicidad o servicios: clientes, cotizaciones, seguimiento y reportes.</p>
@@ -1129,7 +1122,7 @@
     <section class="stats">
       <div class="container stats-grid reveal" id="statsGrid">
         <div class="stat"><b><span class="count" data-target="50" data-prefix="+">0</span></b><span>Proyectos entregados</span></div>
-        <div class="stat"><b><span class="count" data-target="100" data-suffix="%">0</span></b><span>Clientes satisfechos</span></div>
+        <div class="stat"><b><span class="count" data-target="98" data-suffix="%">0</span></b><span>Clientes satisfechos</span></div>
         <div class="stat"><b><span class="count" data-target="5" data-prefix="+">0</span></b><span>Años de experiencia</span></div>
         <div class="stat"><b><span class="count" data-target="24" data-suffix="h">0</span></b><span>Tiempo máx. de respuesta</span></div>
       </div>
@@ -1320,10 +1313,10 @@
           <div class="eyebrow">Confianza</div>
           <h2>Una atención cercana, profesional y personalizada.</h2>
         </div>
-        <div class="testimonials-grid">
-          <article class="testimonial reveal"><div class="stars">★★★★★</div><p>“La página quedó moderna, clara y lista para mostrar nuestros servicios. Buena comunicación durante el proceso.”</p><div class="person"><div class="avatar">C</div><div><b>Cliente corporativo</b><small>Web de servicios</small></div></div></article>
-          <article class="testimonial reveal"><div class="stars">★★★★★</div><p>“Necesitábamos ordenar información y tener un sistema simple para registrar datos. La solución fue práctica y fácil de usar.”</p><div class="person"><div class="avatar">N</div><div><b>Negocio local</b><small>Sistema interno</small></div></div></article>
-          <article class="testimonial reveal"><div class="stars">★★★★★</div><p>“Nos ayudó a presentar mejor nuestros productos y recibir consultas de clientes desde el celular.”</p><div class="person"><div class="avatar">E</div><div><b>Emprendimiento</b><small>Catálogo online</small></div></div></article>
+        <div class=”testimonials-grid”>
+          <article class=”testimonial reveal”><div class=”stars”>★★★★★</div><p>”Leider nos entregó la página en menos de dos semanas, exactamente como la pedimos. Muy buena comunicación desde el primer día y el resultado superó lo que esperábamos.”</p><div class=”person”><div class=”avatar” style=”background:linear-gradient(135deg,#1e40af,#3b82f6)”>CM</div><div><b>Carlos M.</b><small>Empresa de logística · Lima</small></div></div></article>
+          <article class=”testimonial reveal”><div class=”stars”>★★★★★</div><p>”Teníamos todo en papel y Excel desordenado. Ahora manejamos el control de habitaciones y reservas desde el celular. El sistema es simple y funciona perfecto.”</p><div class=”person”><div class=”avatar” style=”background:linear-gradient(135deg,#065f46,#10b981)”>NP</div><div><b>Nancy P.</b><small>Hostal San Marcos · Trujillo</small></div></div></article>
+          <article class=”testimonial reveal”><div class=”stars”>★★★★★</div><p>”Muy recomendable. Nos armó el catálogo online con fotos y precios en una semana. Ahora los clientes nos escriben directo por WhatsApp desde la página.”</p><div class=”person”><div class=”avatar” style=”background:linear-gradient(135deg,#7c2d12,#ea580c)”>EV</div><div><b>Eduardo V.</b><small>Tienda de repuestos · Lima</small></div></div></article>
         </div>
       </div>
     </section>
@@ -1344,10 +1337,10 @@
           <div class="eyebrow">Contacto</div>
           <h2>Hablemos de tu proyecto.</h2>
           <p style="margin:16px 0 18px;">Envíame tu idea y te propongo una solución clara, moderna y adaptada a tu presupuesto.</p>
-          <div class="contact-item"><i>📱</i><div><b>WhatsApp</b><p><a href="https://wa.me/51961186204?text=Hola%20Leider%2C%20me%20interesa%20cotizar%20un%20proyecto" target="_blank" rel="noopener" style="color:var(--azul);font-weight:800;">+51 961 186 204</a></p></div></div>
-          <div class="contact-item"><i>✉️</i><div><b>Correo</b><p>leidercostoshotel@gmail.com</p></div></div>
-          <div class="contact-item"><i>📍</i><div><b>Ubicación</b><p>Lima, Perú</p></div></div>
-          <div class="contact-item"><i>⚡</i><div><b>Especialidad</b><p>Páginas web, sistemas a medida, Power BI, Excel, Google Sheets y soluciones tecnológicas.</p></div></div>
+          <div class="contact-item"><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 005 5L15 13l5 2v4a2 2 0 01-2 2A16 16 0 013 6a2 2 0 012-2"/></svg></i><div><b>WhatsApp</b><p><a href="https://wa.me/51961186204?text=Hola%20Leider%2C%20me%20interesa%20cotizar%20un%20proyecto" target="_blank" rel="noopener" style="color:var(--azul);font-weight:800;">+51 961 186 204</a></p></div></div>
+          <div class="contact-item"><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M22 7l-8.97 5.7a1.94 1.94 0 01-2.06 0L2 7"/></svg></i><div><b>Correo</b><p>leidercostoshotel@gmail.com</p></div></div>
+          <div class="contact-item"><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg></i><div><b>Ubicación</b><p>Lima, Perú — trabajo remoto a nivel nacional</p></div></div>
+          <div class="contact-item"><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg></i><div><b>Especialidad</b><p>Páginas web, sistemas a medida, Power BI, Excel, Google Sheets y soluciones tecnológicas.</p></div></div>
         </div>
 
         <form id="contactForm" class="reveal">
@@ -1384,15 +1377,15 @@
     <div class="garantia-band">
       <div class="container garantia-inner">
         <div class="garantia-badge">
-          <span class="g-icon">🛡️</span>
-          <div><h3>Satisfacción garantizada</h3><p>Si el resultado no te convence, seguimos trabajando sin costo adicional hasta que quedes 100% satisfecho.</p></div>
+          <span class="g-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg></span>
+          <div><h3>Satisfacción garantizada</h3><p>Si el resultado no te convence, seguimos trabajando sin costo adicional hasta que quedes satisfecho.</p></div>
         </div>
         <div class="garantia-badge">
-          <span class="g-icon">⚡</span>
+          <span class="g-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></span>
           <div><h3>Respuesta en menos de 24h</h3><p>Cada consulta o solicitud recibe respuesta el mismo día o al día siguiente, sin excepción.</p></div>
         </div>
         <div class="garantia-badge">
-          <span class="g-icon">🤝</span>
+          <span class="g-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></span>
           <div><h3>Trato directo, sin intermediarios</h3><p>Trabajas directamente conmigo, Leider. Sin agencias, sin retrasos, sin sorpresas.</p></div>
         </div>
       </div>
