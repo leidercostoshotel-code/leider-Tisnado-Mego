@@ -89,6 +89,16 @@
     },
     {
       "@context": "https://schema.org",
+      "@type": "SoftwareApplication",
+      "name": "GastroControl",
+      "url": "https://gastrocontrol.lat/app",
+      "applicationCategory": "BusinessApplication",
+      "operatingSystem": "Web",
+      "description": "Aplicación web para la gestión de restaurantes: mesas, pedidos, caja y reportes.",
+      "author": { "@type": "Person", "name": "Leider Tisnado Mego", "url": "https://leidertisnado.com" }
+    },
+    {
+      "@context": "https://schema.org",
       "@type": "WebSite",
       "name": "Leider Tisnado Mego",
       "url": "https://leidertisnado.com",
@@ -599,6 +609,47 @@
     .stat span { color:#bfeaff; }
 
     /* Portfolio */
+    .featured-project {
+      display:grid; grid-template-columns:1.05fr .95fr; gap:0;
+      background:white; border:1px solid rgba(8,42,104,.08);
+      border-radius:var(--r-lg); overflow:hidden;
+      box-shadow:var(--shadow-sm); margin-bottom:26px;
+      transition:box-shadow .28s ease, border-color .28s ease;
+    }
+    .featured-project:hover { box-shadow:var(--shadow-md); border-color:rgba(0,194,255,.35); }
+    .fp-visual {
+      background:linear-gradient(135deg,#061a44,#0b3b91 70%,#0d6efd);
+      padding:38px 34px; display:flex; align-items:center; justify-content:center;
+    }
+    .fp-app { width:100%; max-width:460px; background:#0a2456; border:1px solid rgba(255,255,255,.14); border-radius:14px; overflow:hidden; box-shadow:0 18px 44px rgba(0,0,0,.28); }
+    .fp-app-top { display:flex; align-items:center; gap:10px; padding:12px 16px; background:rgba(255,255,255,.07); border-bottom:1px solid rgba(255,255,255,.09); }
+    .fp-app-logo { width:26px; height:26px; border-radius:8px; background:var(--gradiente); display:grid; place-items:center; }
+    .fp-app-logo svg { width:14px; height:14px; stroke:white; }
+    .fp-app-name { color:white; font-weight:700; font-size:13px; letter-spacing:.02em; }
+    .fp-app-name span { color:#7dd7ff; }
+    .fp-live { margin-left:auto; display:flex; align-items:center; gap:6px; color:#86efac; font-size:11px; font-weight:700; }
+    .fp-live::before { content:''; width:7px; height:7px; border-radius:50%; background:#22c55e; }
+    .fp-mesas { display:grid; grid-template-columns:repeat(4,1fr); gap:8px; padding:14px 16px 6px; }
+    .fp-mesa { border-radius:9px; padding:9px 8px; background:rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.08); }
+    .fp-mesa b { display:block; color:white; font-size:11px; font-weight:700; margin-bottom:4px; }
+    .fp-mesa i { display:block; height:4px; border-radius:99px; background:rgba(255,255,255,.18); font-style:normal; }
+    .fp-mesa.ocupada { background:rgba(0,194,255,.14); border-color:rgba(0,194,255,.35); }
+    .fp-mesa.ocupada i { background:rgba(0,194,255,.65); }
+    .fp-rows { padding:10px 16px 16px; display:grid; gap:7px; }
+    .fp-row { display:flex; align-items:center; gap:8px; background:rgba(255,255,255,.05); border-radius:8px; padding:8px 10px; }
+    .fp-row-dot { width:7px; height:7px; border-radius:50%; background:rgba(0,194,255,.8); flex-shrink:0; }
+    .fp-row-bar { flex:1; height:5px; border-radius:99px; background:rgba(255,255,255,.16); }
+    .fp-row-amt { width:38px; height:5px; border-radius:99px; background:rgba(134,239,172,.6); }
+    .fp-body { padding:38px 40px; display:flex; flex-direction:column; justify-content:center; align-items:flex-start; }
+    .fp-badge {
+      display:inline-flex; align-items:center; gap:8px;
+      background:#ecfdf5; border:1px solid #a7f3d0; color:#065f46;
+      border-radius:999px; padding:7px 14px; font-size:12px; font-weight:700; margin-bottom:14px;
+    }
+    .fp-badge::before { content:''; width:8px; height:8px; border-radius:50%; background:#22c55e; }
+    .fp-body h3 { font-size:30px; margin-bottom:12px; letter-spacing:-.02em; }
+    .fp-body p { color:#475569; line-height:1.65; margin-bottom:22px; }
+    .fp-actions { display:flex; flex-wrap:wrap; gap:12px; }
     .portfolio-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:26px; }
     .portfolio-card { border-radius:var(--r-lg); overflow:hidden; background:white; border:1px solid rgba(8,42,104,.08); box-shadow:var(--shadow-sm); transition:.32s cubic-bezier(.4,0,.2,1); display:flex; flex-direction:column; }
     .portfolio-card:hover { transform:translateY(-4px); box-shadow:var(--shadow-md); border-color:rgba(0,194,255,.35); }
@@ -784,6 +835,7 @@
       .links .menu-cta { display:inline-flex; width:100%; margin-top:6px; }
       .hero-grid, .about-grid, .contact-grid { grid-template-columns:1fr; }
       .services-grid, .plans, .portfolio-grid, .testimonials-grid { grid-template-columns:1fr 1fr; }
+      .featured-project { grid-template-columns:1fr; }
       .stats-grid { grid-template-columns:1fr 1fr; }
       .cta-box { flex-direction:column; align-items:flex-start; }
             .footer-grid { grid-template-columns:1fr 1fr; }
@@ -808,6 +860,9 @@
       .about-visual { min-height:320px; }
       .pillar { flex-direction:column; gap:12px; }
             .contact-card, form { padding:22px; }
+      .fp-visual { padding:24px 18px; }
+      .fp-body { padding:26px 22px; }
+      .fp-mesas { grid-template-columns:repeat(3,1fr); }
       .csd-options { max-height:min(300px, 45vh); }
     }
   </style>
@@ -1072,7 +1127,7 @@
                 <li>Comunicación directa con cocina</li>
                 <li>Cierre de cuentas y reportes diarios</li>
               </ul>
-              <a href="#contacto" class="sc-cta">Cotizar este servicio →</a>
+              <a href="https://gastrocontrol.lat/app" target="_blank" rel="noopener" class="sc-cta">Ver caso real: GastroControl →</a>
             </div>
           </article>
 
@@ -1156,8 +1211,44 @@
         <div class="section-title center reveal">
           <div class="eyebrow">Tipos de proyecto</div>
           <h2>Así se ve lo que construyo, según tu tipo de negocio.</h2>
-          <p>Estos son los cuatro formatos que más desarrollo. ¿Quieres ver trabajos reales de tu rubro? Pídemelos por WhatsApp y te los comparto.</p>
+          <p>Empieza por GastroControl, mi sistema para restaurantes que ya está en producción, y debajo los cuatro formatos que más desarrollo. ¿Quieres ver más casos de tu rubro? Pídemelos por WhatsApp.</p>
         </div>
+        <article class="featured-project reveal">
+          <div class="fp-visual" aria-hidden="true">
+            <div class="fp-app">
+              <div class="fp-app-top">
+                <div class="fp-app-logo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 2v7c0 1.1.9 2 2 2h4a2 2 0 002-2V2"/><line x1="7" y1="2" x2="7" y2="22"/><path d="M21 15V2a5 5 0 00-5 5v6c0 1.1.9 2 2 2h3zm0 0v7"/></svg></div>
+                <div class="fp-app-name">Gastro<span>Control</span></div>
+                <div class="fp-live">EN VIVO</div>
+              </div>
+              <div class="fp-mesas">
+                <div class="fp-mesa ocupada"><b>Mesa 1</b><i></i></div>
+                <div class="fp-mesa"><b>Mesa 2</b><i></i></div>
+                <div class="fp-mesa ocupada"><b>Mesa 3</b><i></i></div>
+                <div class="fp-mesa ocupada"><b>Mesa 4</b><i></i></div>
+                <div class="fp-mesa"><b>Mesa 5</b><i></i></div>
+                <div class="fp-mesa ocupada"><b>Mesa 6</b><i></i></div>
+                <div class="fp-mesa"><b>Mesa 7</b><i></i></div>
+                <div class="fp-mesa ocupada"><b>Mesa 8</b><i></i></div>
+              </div>
+              <div class="fp-rows">
+                <div class="fp-row"><span class="fp-row-dot"></span><span class="fp-row-bar"></span><span class="fp-row-amt"></span></div>
+                <div class="fp-row"><span class="fp-row-dot"></span><span class="fp-row-bar" style="width:70%"></span><span class="fp-row-amt"></span></div>
+                <div class="fp-row"><span class="fp-row-dot"></span><span class="fp-row-bar" style="width:85%"></span><span class="fp-row-amt"></span></div>
+              </div>
+            </div>
+          </div>
+          <div class="fp-body">
+            <span class="fp-badge">Proyecto real · En producción</span>
+            <h3>GastroControl</h3>
+            <p>Aplicación web que desarrollé para la gestión de restaurantes: control de mesas, pedidos, caja y reportes desde el navegador, sin instalar nada. Está funcionando en producción — pruébala tú mismo.</p>
+            <div class="fp-actions">
+              <a href="https://gastrocontrol.lat/app" target="_blank" rel="noopener" class="btn btn-primary">Ver app en vivo →</a>
+              <a href="#contacto" class="btn btn-outline">Quiero algo así</a>
+            </div>
+          </div>
+        </article>
+
         <div class="portfolio-grid">
 
           <article class="portfolio-card reveal">
