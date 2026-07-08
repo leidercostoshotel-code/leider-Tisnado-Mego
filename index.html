@@ -101,6 +101,14 @@
     },
     {
       "@context": "https://schema.org",
+      "@type": "CreativeWork",
+      "name": "Consultorio Alva",
+      "url": "https://consultorioalva.lat/",
+      "description": "Página web para consultorio médico, desarrollada por Leider Tisnado Mego.",
+      "author": { "@type": "Person", "name": "Leider Tisnado Mego", "url": "https://leidertisnado.com" }
+    },
+    {
+      "@context": "https://schema.org",
       "@type": "WebSite",
       "name": "Leider Tisnado Mego",
       "url": "https://leidertisnado.com",
@@ -677,6 +685,8 @@
     .portfolio-body h3 { margin:8px 0 8px; }
     .portfolio-body p { color:#475569; font-size:15px; line-height:1.6; flex:1; margin:0 0 18px; }
     .tag { display:inline-flex; padding:6px 12px; border-radius:999px; background:#eaf7ff; color:#006fb0; font-size:12px; font-weight:700; margin-bottom:4px; }
+    .tag-live { display:inline-flex; align-items:center; gap:6px; padding:6px 12px; border-radius:999px; background:#ecfdf5; border:1px solid #a7f3d0; color:#065f46; font-size:12px; font-weight:700; margin:0 0 4px 8px; }
+    .tag-live::before { content:''; width:7px; height:7px; border-radius:50%; background:#22c55e; }
 
     /* Pricing */
     .pricing { background:linear-gradient(180deg, #ffffff, #edf8ff); }
@@ -1204,7 +1214,7 @@
         <div class="section-title center reveal">
           <div class="eyebrow">Tipos de proyecto</div>
           <h2>Así se ve lo que construyo, según tu tipo de negocio.</h2>
-          <p>Empieza por GastroControl Pro, mi sistema para restaurantes que ya está en producción, y debajo los cuatro formatos que más desarrollo. ¿Quieres ver más casos de tu rubro? Pídemelos por WhatsApp.</p>
+          <p>Dos de mis proyectos ya están publicados y funcionando: GastroControl Pro y la web del Consultorio Alva. Debajo, los formatos que más desarrollo. ¿Quieres ver casos de tu rubro? Pídemelos por WhatsApp.</p>
         </div>
         <article class="featured-project reveal">
           <div class="fp-visual" aria-hidden="true">
@@ -1246,13 +1256,13 @@
 
           <article class="portfolio-card reveal">
             <div class="portfolio-shot ps-web">
-              <img src="https://images.unsplash.com/photo-1522542550221-31fd19575a2d?auto=format&fit=crop&w=900&q=80" alt="Diseño de página web corporativa en pantalla" loading="lazy" decoding="async">
+              <img src="https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=900&q=80" alt="Página web para consultorio médico" loading="lazy" decoding="async">
             </div>
             <div class="portfolio-body">
-              <span class="tag">Web Corporativa</span>
-              <h3>Empresa de servicios</h3>
-              <p>Página profesional con secciones de beneficios, servicios, contacto y llamadas a la acción que convierten visitantes en clientes.</p>
-              <a href="#contacto" class="sc-cta">Quiero algo similar →</a>
+              <div><span class="tag">Web de Salud</span><span class="tag-live">Proyecto real</span></div>
+              <h3>Consultorio Alva</h3>
+              <p>Página web que desarrollé para un consultorio médico: presentación profesional, servicios y contacto directo con la doctora. Publicada y funcionando.</p>
+              <a href="https://consultorioalva.lat/" target="_blank" rel="noopener" class="sc-cta">Ver web en vivo →</a>
             </div>
           </article>
 
